@@ -1,6 +1,6 @@
 /**
  *
- * index.android.js
+ * index.js
 
  * Description:       This file defines component of login for android platform.
  * Version:           0.0.1
@@ -12,20 +12,19 @@
 
 'use strict';
 
-import React, { StyleSheet, Text, View } from 'react-native';
+let React = require('react-native');
+let { StyleSheet, Text, View } = React;
 
-import BackDrop from '../Shared/backdrop.android.js';
-import Input from '../Shared/input.android.js';
-import Button from '../Shared/button.android.js';
+let BackDrop = require('../Shared/backdrop');
+let Input = require('../Shared/input');
+let Button = require('../Shared/button');
 
 let FormBlock = React.createClass({
   render() {
     let formElementStyle = {
       flexDirection: 'row',   // row direction by default
-      backgroundColor: '#f6f7f8',
-      borderWidth: 0.5,
-      borderColor: '#d6d7da',
-      marginBottom: 2,
+      alignItems: 'center',
+      height: 50
     };
     return (
       <View style={[formElementStyle, this.props.style]}>
@@ -36,20 +35,37 @@ let FormBlock = React.createClass({
 });
 
 let Login = React.createClass({
+  getInitialState() {
+    return {
+      username: '',
+      pwd: ''
+    };
+  },
+
   render() {
     return (
-      <View>
-        <Text>登陆</Text>
-        <FormBlock style={{flexDirection: 'column'}}>
-          <Text>用户名：</Text>
+      <View style={styles.container}>
+        <Text style={styles.title}>欢迎登陆</Text>
+        <FormBlock>
+          <Text style={styles.inputLabel}>用户名：</Text>
           <Input ref='username' style={styles.inputStyle} onBlur={this._setUsername}/>
         </FormBlock>
-        <FormBlock style={{flexDirection: 'column'}}>
-          <Text>密码：</Text>
+        <FormBlock>
+          <Text style={styles.inputLabel}>密码：</Text>
           <Input ref='pwd' style={styles.inputStyle} onBlur={this._setPassword}/>
         </FormBlock>
-        <FormBlock style={{flexDirection: 'column'}}>
-          <Button ref='pwd' style={styles.inputStyle} onPress={this._login}/>
+        <FormBlock style={{marginTop: 30}}>
+          <Button ref='pwd' onPress={this._login}>
+            <Text>登陆</Text>
+          </Button>
+          <View style={styles.forgetPwd}>
+            <Text>忘记密码?</Text>
+          </View>
+        </FormBlock>
+        <FormBlock>
+          <View style={styles.registerView}>
+            <Text style={styles.registerText}>免费注册>></Text>
+          </View>
         </FormBlock>
       </View>
       )
@@ -66,6 +82,8 @@ let Login = React.createClass({
   _login() {
     if (this._validateInput()) {
       // Send a post request to login api
+    } else {
+      // popup an error message
     }
   },
 
@@ -79,9 +97,38 @@ let Login = React.createClass({
 });
 
 let styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+    height: 180
+  },
   inputStyle: {
     width: 180,
-    height: 80
+    height: 40,
+    fontSize: 18
+  },
+  title: {
+    fontSize: 25,
+    textAlign: 'center',
+    margin: 10,
+    height: 40
+  },
+  inputLabel: {
+    width: 60,
+    textAlign: 'right',
+  },
+  forgetPwd: {
+    borderBottomColor: 'black',
+    borderBottomWidth: 1
+  },
+  registerView: {
+    borderBottomColor: 'orange',
+    borderBottomWidth: 1
+  },
+  registerText: {
+    color: 'orange'
   }
 });
 

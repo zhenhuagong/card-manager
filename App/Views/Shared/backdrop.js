@@ -1,6 +1,6 @@
 /**
  *
- * backdrop.android.js
+ * backdrop.js
 
  * Description:       An overlay of backdrop.
  * Version:           0.0.1
@@ -12,7 +12,7 @@
 
 'use strict';
 
-import React from 'react-native';
+let React = require('react-native');
 
 let BackDrop = React.createClass({
   getInitialState() {

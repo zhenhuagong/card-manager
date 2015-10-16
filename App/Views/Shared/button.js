@@ -1,6 +1,6 @@
 /**
  *
- * button.android.js
+ * button.js
 
  * Description:       Button Component.
  * Version:           0.0.1
@@ -12,7 +12,8 @@
 
 'use strict';
 
-import React, { StyleSheet, Text, TouchableHighlight } from 'react-native';
+let React = require('react-native');
+let { StyleSheet, Text, TouchableHighlight } = React;
 
 let Button = React.createClass({
   propTypes: {
@@ -35,7 +36,7 @@ let Button = React.createClass({
 
   render() {
     let colorStyle = {
-      color: this.state.active ? '#fff' : '#000',
+      color: this.state.active ? '#grey' : '#000',
     };
     return (
       <TouchableHighlight
@@ -53,19 +54,19 @@ let Button = React.createClass({
 let styles = StyleSheet.create({
   button: {
     borderColor: '#696969',
-    borderRadius: 5,
+    borderRadius: 2,
     borderWidth: 1,
-    margin: 5,
-    flex: 1,
+    margin: 10,
     height: 44,
+    width: 160,
     alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
+    justifyContent: 'center'
   },
   buttonText: {
     fontSize: 18,
-    margin: 5,
     textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 });
 
