@@ -25,6 +25,7 @@ let {
   TouchableHighlight,
 } = React
 
+let Configs = require('../configs');
 
 let DrawerList = React.createClass({
   getInitialState() {
@@ -37,13 +38,13 @@ let DrawerList = React.createClass({
 
   render(){
     let TouchableElement = TouchableHighlight;
-    if (Platform.OS === 'android') {
-      TouchableElement = TouchableNativeFeedback;
-    }
+    // if (Platform.OS === 'android') {
+    //   TouchableElement = TouchableNativeFeedback;
+    // }
     return (
       <View style={styles.container} {...this.props}>
         <View style={styles.header}/>
-        <TouchableElement>
+        <TouchableElement onPress={this._gotoLogin}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 16}}>
             <Image
               source={require('image!ic_explore_white_24dp')}
@@ -53,7 +54,7 @@ let DrawerList = React.createClass({
             </Text>
           </View>
         </TouchableElement>
-        <TouchableElement>
+        <TouchableElement onPress={this._gotoAbout}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 16}}>
             <Image
               source={require('image!ic_explore_white_24dp')}
@@ -61,11 +62,26 @@ let DrawerList = React.createClass({
             <Text style={styles.menuText}>
               关于
             </Text>
-
           </View>
         </TouchableElement>
       </View>
     );
+  },
+
+  _gotoLogin() {
+    console.log('go to login');
+    this.props.navigator.push({
+      name: Configs.routes.LOGIN,
+      index: 4
+    });
+  },
+
+  _gotoAbout() {
+    console.log('go to about');
+    this.props.navigator.push({
+      name: Configs.routes.ABOUT,
+      index: 5
+    });
   },
 });
 

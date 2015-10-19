@@ -15,7 +15,17 @@ let {
   BackAndroid
 } = React;
 
+let Configs = require('./App/configs');
+let Login = require('./App/Views/Login');
+let About = require('./App/Views/about');
+let Dashboard = require('./App/Views/dashboard');
+let SMSManagement = require('./App/Views/SMS');
+let QuotaManagement = require('./App/Views/Quota');
+let EShop = require('./App/Views/EShop');
+let NavToolbar = require('./App/Views/Shared/navToolBar');
+
 let _navigator;
+
 BackAndroid.addEventListener('hardwareBackPress', function() {
   if (_navigator && _navigator.getCurrentRoutes().length > 1) {
     _navigator.pop();
@@ -23,10 +33,6 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
   }
   return false;
 });
-
-let Configs = require('./App/configs');
-let Login = require('./App/Views/Login');
-let Dashboard = require('./App/Views/dashboard');
 
 let CardManager = React.createClass({
   getInitialState() {
@@ -37,35 +43,73 @@ let CardManager = React.createClass({
   },
 
   render() {
+    console.log('enterance of app for android platform');
     if (this.state.loginExpired) {
       <View style={styles.loginContainer}>
         <Login />
       </View>
     } else {
-      let initialRoute = {name: Configs.routes.DASHBOARD};
       return (
         <Navigator
           style={styles.container}
-          initialRoute={initialRoute}
+          initialRoute={{name: Configs.routes.DASHBOARD, index: 0}}
           configureScene={() => Navigator.SceneConfigs.FadeAndroid}
-          renderScene={this.RouteMapper} />
-
+          renderScene={this._renderScene} />
       );
     }
   },
 
-  RouteMapper(route, navigationOperations, onComponentRef) {
-    _navigator = navigationOperations;
+  _renderScene(route, navigator) {
+    _navigator = navigator;
     switch(route.name) {
+      // index: 0
       case Configs.routes.DASHBOARD:
         return (
           <View style={styles.container}>
-            <Dashboard navigator={navigationOperations}/>
+            <NavToolbar navigator={navigator}/>
+            <Dashboard navigator={navigator} name={route.name}/>
           </View>
         );
-      default:
-        // Redirect to error page
-        break;
+      // index: 1
+      case Configs.routes.SMS:
+        return (
+          <View style={styles.loginContainer}>
+            <NavToolbar navIcon={true} navigator={navigator}/>
+            <SMSManagement navigator={navigator} name={route.name}/>
+          </View>
+        );
+      // index: 2
+      case Configs.routes.QUOTA:
+        return (
+          <View style={styles.loginContainer}>
+            <NavToolbar navIcon={true} navigator={navigator}/>
+            <QuotaManagement navigator={navigator} name={route.name}/>
+          </View>
+        );
+      // index: 3
+      case Configs.routes.ESHOP:
+        return (
+          <View style={styles.loginContainer}>
+            <NavToolbar navIcon={true} navigator={navigator}/>
+            <EShop navigator={navigator} name={route.name}/>
+          </View>
+        );
+      // index: 4
+      case Configs.routes.LOGIN:
+        return (
+          <View style={styles.loginContainer}>
+            <NavToolbar navIcon={true} navigator={navigator}/>
+            <Login navigator={navigator} name={route.name}/>
+          </View>
+        );
+      // index: 5
+      case Configs.routes.ABOUT:
+        return (
+          <View style={styles.loginContainer}>
+            <NavToolbar navIcon={true} navigator={navigator}/>
+            <About navigator={navigator} name={route.name}/>
+          </View>
+        );
     }
   },
 });
@@ -84,3 +128,5 @@ let styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('CardManager', () => CardManager);
+
+module.exports = CardManager;

@@ -19,7 +19,9 @@ var Configs = {
     DASHBOARD: 'dashboard',
     SMS: 'sms_management',
     QUOTA: 'quota_management',
-    ESHOP: 'eshop'
+    ESHOP: 'eshop',
+    LOGIN: 'login',
+    ABOUT: 'about'
   }
 };
 

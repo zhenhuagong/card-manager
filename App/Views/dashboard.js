@@ -49,6 +49,7 @@ let Dashboard = React.createClass({
             title={title}
             titleColor="white"
             navIcon={require('image!ic_drawer')}
+            logo={require('image!ic_launcher')}
             style={styles.toolbar}
             onIconClicked={() => this.drawer.openDrawer()}
             onActionSelected={this.onActionSelected} />
@@ -58,14 +59,9 @@ let Dashboard = React.createClass({
     );
   },
 
-  _onSelectDrawerItem(menuId: number){
-
-  },
-
   _renderNavigationView(){
     return(
-      <DrawerList
-        onSelectItem={this._onSelectDrawerItem}/>
+      <DrawerList navigator={this.props.navigator} name={this.props.name}/>
     );
   },
 });
