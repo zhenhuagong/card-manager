@@ -18,6 +18,8 @@ let { StyleSheet, Text, View } = React;
 let BackDrop = require('../Shared/backdrop');
 let Input = require('../Shared/input');
 let Button = require('../Shared/button');
+let Request = require('../../Networks/request');
+let ApiConfigs = require('../../Networks/apiConfigs');
 
 let FormBlock = React.createClass({
   render() {
@@ -82,6 +84,18 @@ let Login = React.createClass({
   _login() {
     if (this._validateInput()) {
       // Send a post request to login api
+      Request.post(ApiConfigs.loginUrl, {
+        data: {
+          username: this.state.username,
+          password: this.state.pwd
+        },
+        onSuccess() {
+
+        },
+        onFail() {
+
+        }
+      });
     } else {
       // popup an error message
     }
