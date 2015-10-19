@@ -85,17 +85,13 @@ let Login = React.createClass({
     if (this._validateInput()) {
       // Send a post request to login api
       Request.post(ApiConfigs.loginUrl, {
-        data: {
-          username: this.state.username,
-          password: this.state.pwd
-        },
-        onSuccess() {
+        username: this.state.username,
+        password: this.state.pwd
+      }).then((result) => {
 
-        },
-        onFail() {
+      }).catch((err) => {
 
-        }
-      });
+      })
     } else {
       // popup an error message
     }

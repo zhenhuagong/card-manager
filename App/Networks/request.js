@@ -1,17 +1,20 @@
 var SuperAgent = require('superagent');
+var P = require('bluebird');
 
 var Request = {
-  post(url, params) {
-    SuperAgent.post(url)
-      .type('form')
-      .send(params.data)
-      .end((err, res) => {
-        if (err || !res.body) {
-          params.onFail && params.onFail();
-        } else {
-          params.onSuccess && params.onSuccess(res.body);
-        }
-      });
+  post(url, data) {
+    return new P((resolve, reject) => {
+      SuperAgent.post(url)
+        .type('form')
+        .send(data)
+        .end((err, res) => {
+          if (err || !res.body) {
+            reject(err);
+          } else {
+            resolve(res.body);
+          }
+        });
+    })
   }
 }
 
