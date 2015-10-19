@@ -19,7 +19,7 @@ let BackDrop = require('../Shared/backdrop');
 let Input = require('../Shared/input');
 let Button = require('../Shared/button');
 let Request = require('../../Networks/request');
-let ApiConfigs = require('../../Networks/apiConfigs');
+let Configs = require('../../configs');
 
 let FormBlock = React.createClass({
   render() {
@@ -84,7 +84,7 @@ let Login = React.createClass({
   _login() {
     if (this._validateInput()) {
       // Send a post request to login api
-      Request.post(ApiConfigs.loginUrl, {
+      Request.post(Configs.api.loginUrl, {
         username: this.state.username,
         password: this.state.pwd
       }).then((result) => {
