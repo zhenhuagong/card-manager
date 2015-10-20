@@ -24,18 +24,20 @@ let {
   DrawerLayoutAndroid,
   ToolbarAndroid,
   ToastAndroid,
-  BackAndroid
+  BackAndroid,
+  TouchableHighlight
 } = React;
 
 let DrawerList = require('./drawerList');
 let DRAWER_WIDTH_LEFT = 96;
 let Dashboard = React.createClass({
-  componentWillMount() {
-    BackAndroid.addEventListener('hardwareBackPress', false);
-  },
-
   render() {
-    let content = (<View style={styles.container}></View>);
+    let content = (
+    <View style={styles.container}>
+      <View style={styles.bottomMenu}>
+        <TouchableHighlight />
+      </View>
+    </View>);
     let title = 'Title';
     return (
       <DrawerLayoutAndroid

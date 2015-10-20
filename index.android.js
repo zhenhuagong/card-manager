@@ -23,6 +23,7 @@ let SMSManagement = require('./App/Views/SMS');
 let QuotaManagement = require('./App/Views/Quota');
 let EShop = require('./App/Views/EShop');
 let NavToolbar = require('./App/Views/Shared/navToolBar');
+let BottomMenuBar = require('./App/Views/Shared/bottomMenuBar');
 
 let _navigator;
 
@@ -69,6 +70,7 @@ let CardManager = React.createClass({
         return (
           <View style={styles.container}>
             <Dashboard navigator={navigator} name={route.name}/>
+            <BottomMenuBar navigator={navigator} name={route.name}/>
           </View>
         );
       // index: 1
@@ -77,6 +79,7 @@ let CardManager = React.createClass({
           <View style={styles.container}>
             <NavToolbar navIcon={true} navigator={navigator}/>
             <SMSManagement navigator={navigator} name={route.name}/>
+            <BottomMenuBar navigator={navigator} name={route.name}/>
           </View>
         );
       // index: 2
@@ -85,6 +88,7 @@ let CardManager = React.createClass({
           <View style={styles.container}>
             <NavToolbar navIcon={true} navigator={navigator}/>
             <QuotaManagement navigator={navigator} name={route.name}/>
+            <BottomMenuBar navigator={navigator} name={route.name}/>
           </View>
         );
       // index: 3
@@ -93,6 +97,7 @@ let CardManager = React.createClass({
           <View style={styles.container}>
             <NavToolbar navIcon={true} navigator={navigator}/>
             <EShop navigator={navigator} name={route.name}/>
+            <BottomMenuBar navigator={navigator} name={route.name}/>
           </View>
         );
       // index: 4

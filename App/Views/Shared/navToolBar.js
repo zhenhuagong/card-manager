@@ -22,10 +22,6 @@ let {
 
 let NavToolbar = React.createClass({
 
-  componentWillMount() {
-    let navigator = this.props.navigator;
-  },
-
   render() {
     if (this.props.navIcon) {
       return (
@@ -52,7 +48,7 @@ let NavToolbar = React.createClass({
 let styles = StyleSheet.create({
   toolbar: {
     backgroundColor: '#16A085',
-    height: 56,
+    height: 56
   }
 });
 

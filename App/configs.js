@@ -22,6 +22,13 @@ var Configs = {
     ESHOP: 'eshop',
     LOGIN: 'login',
     ABOUT: 'about'
+  },
+
+  appTabs: {
+    fav: '常用',
+    sms: '短信',
+    quota: '流量',
+    eshop: '商城'
   }
 };
 
