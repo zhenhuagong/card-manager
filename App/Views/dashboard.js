@@ -28,14 +28,14 @@ let {
 } = React;
 
 let DrawerList = require('./drawerList');
-let DRAWER_WIDTH_LEFT = 56;
+let DRAWER_WIDTH_LEFT = 96;
 let Dashboard = React.createClass({
   componentWillMount() {
     BackAndroid.addEventListener('hardwareBackPress', false);
   },
 
   render() {
-    let content = <View style={styles.container}></View>;
+    let content = (<View style={styles.container}></View>);
     let title = 'Title';
     return (
       <DrawerLayoutAndroid
@@ -73,7 +73,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#FAFAFA',
   },
   toolbar: {
-    backgroundColor: '#FF6600',
+    backgroundColor: '#16A085',
     height: 56,
   }
 });

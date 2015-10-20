@@ -34,7 +34,7 @@ let NavToolbar = React.createClass({
           logo={require('image!ic_launcher')}
           navIcon={{uri: "ic_arrow_back_white_24dp", isStatic: true}}
           onIconClicked={this.props.navigator.pop}
-          titleColor="#ffffff"
+          titleColor="#fff"
           title='CardManager' />
       )
     }
@@ -43,7 +43,7 @@ let NavToolbar = React.createClass({
         style={styles.toolbar}
         logo={require('image!ic_launcher')}
         onIconClicked={this.props.navigator.pop}
-        titleColor="#ffffff"
+        titleColor="#fff"
         title='CardManager' />
     )
   }
@@ -51,7 +51,7 @@ let NavToolbar = React.createClass({
 
 let styles = StyleSheet.create({
   toolbar: {
-    backgroundColor: '#FF6600',
+    backgroundColor: '#16A085',
     height: 56,
   }
 });

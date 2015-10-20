@@ -31,6 +31,8 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
     _navigator.pop();
     return true;
   }
+  // TODO: add toast when _navigator.getCurrentRoutes().length === 1
+  // which means user will exit the app
   return false;
 });
 
