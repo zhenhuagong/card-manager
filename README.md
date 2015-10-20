@@ -1,6 +1,6 @@
 ## Card Manager
 
-Card manager is an mobile app built with React Native.
+Card manager is an mobile app built with React Native. It can be bundled into an Android/iOS app.
 
 ### Run on Device
 
@@ -44,7 +44,7 @@ Then you can follow the official tutorial to prepare the environment: [React Nat
 #### On Android
 ```
 $npm install
-$adb reverse tcp:8081 tcp:8081
+$adb reverse tcp:8081 tcp:8081  # Optional
 $react-native run-android
 ```
 

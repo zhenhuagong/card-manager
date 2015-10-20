@@ -73,7 +73,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#FAFAFA',
   },
   toolbar: {
-    backgroundColor: '#000000',
+    backgroundColor: '#FF6600',
     height: 56,
   }
 });

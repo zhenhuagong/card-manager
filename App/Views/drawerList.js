@@ -88,68 +88,16 @@ let DrawerList = React.createClass({
 let styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1F1F20',
+    backgroundColor: '#6F6F00',
   },
   header: {
     height: 56,
-    backgroundColor: '#000000',
-  },
-  userInfo: {
-    flex: 1,
-    backgroundColor: '#00a2ed',
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  menuContainer: {
-    flex:1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 8,
+    backgroundColor: '#FF6600',
   },
   menuText: {
     fontSize: 14,
     color: 'white',
-  },
-  homeTheme: {
-    fontSize: 16,
-    marginLeft: 16,
-    color: '#00a2ed'
-  },
-  themeItem: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-  },
-  themeName: {
-    flex: 1,
-    fontSize: 16,
-    marginLeft: 16,
-  },
-  themeIndicate: {
-    marginRight: 16,
-    width: 16,
-    height: 16,
-  },
-  separator: {
-    height: 1,
-    backgroundColor: '#eeeeee',
-  },
-  scrollSpinner: {
-    marginVertical: 20,
-  },
-  rowSeparator: {
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
-    height: 1,
-    marginLeft: 4,
-  },
-  rowSeparatorHide: {
-    opacity: 0.0,
-  },
+  }
 });
 
 module.exports = DrawerList;

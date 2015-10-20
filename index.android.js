@@ -66,14 +66,13 @@ let CardManager = React.createClass({
       case Configs.routes.DASHBOARD:
         return (
           <View style={styles.container}>
-            <NavToolbar navigator={navigator}/>
             <Dashboard navigator={navigator} name={route.name}/>
           </View>
         );
       // index: 1
       case Configs.routes.SMS:
         return (
-          <View style={styles.loginContainer}>
+          <View style={styles.container}>
             <NavToolbar navIcon={true} navigator={navigator}/>
             <SMSManagement navigator={navigator} name={route.name}/>
           </View>
@@ -81,7 +80,7 @@ let CardManager = React.createClass({
       // index: 2
       case Configs.routes.QUOTA:
         return (
-          <View style={styles.loginContainer}>
+          <View style={styles.container}>
             <NavToolbar navIcon={true} navigator={navigator}/>
             <QuotaManagement navigator={navigator} name={route.name}/>
           </View>
@@ -89,7 +88,7 @@ let CardManager = React.createClass({
       // index: 3
       case Configs.routes.ESHOP:
         return (
-          <View style={styles.loginContainer}>
+          <View style={styles.container}>
             <NavToolbar navIcon={true} navigator={navigator}/>
             <EShop navigator={navigator} name={route.name}/>
           </View>
@@ -97,7 +96,7 @@ let CardManager = React.createClass({
       // index: 4
       case Configs.routes.LOGIN:
         return (
-          <View style={styles.loginContainer}>
+          <View style={styles.container}>
             <NavToolbar navIcon={true} navigator={navigator}/>
             <Login navigator={navigator} name={route.name}/>
           </View>
@@ -105,7 +104,7 @@ let CardManager = React.createClass({
       // index: 5
       case Configs.routes.ABOUT:
         return (
-          <View style={styles.loginContainer}>
+          <View style={styles.container}>
             <NavToolbar navIcon={true} navigator={navigator}/>
             <About navigator={navigator} name={route.name}/>
           </View>
