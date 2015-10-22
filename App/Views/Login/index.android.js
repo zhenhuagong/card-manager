@@ -15,10 +15,10 @@
 let React = require('react-native');
 let { StyleSheet, Text, View } = React;
 
-let BackDrop = require('../Shared/backdrop');
-let Input = require('../Shared/input');
-let Button = require('../Shared/button');
-let Request = require('../../Networks/request');
+let BackDrop = require('../shared/backdrop');
+let Input = require('../shared/input');
+let Button = require('../shared/button');
+let Request = require('../../networks/request');
 let Configs = require('../../configs');
 
 let FormBlock = React.createClass({

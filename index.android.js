@@ -15,15 +15,15 @@ let {
   BackAndroid
 } = React;
 
-let Configs = require('./App/configs');
-let Login = require('./App/Views/Login');
-let About = require('./App/Views/about');
-let Dashboard = require('./App/Views/dashboard');
-let SMSManagement = require('./App/Views/SMS');
-let QuotaManagement = require('./App/Views/Quota');
-let EShop = require('./App/Views/EShop');
-let NavToolbar = require('./App/Views/Shared/navToolBar');
-let BottomMenuBar = require('./App/Views/Shared/bottomMenuBar');
+let Configs = require('./app/configs');
+let Login = require('./app/views/login');
+let About = require('./app/views/about');
+let Dashboard = require('./app/views/dashboard');
+let SMSManagement = require('./app/views/sms');
+let QuotaManagement = require('./app/views/quota');
+let EShop = require('./app/views/eshop');
+let NavToolbar = require('./app/views/shared/navToolBar');
+let BottomMenuBar = require('./app/views/shared/bottomMenuBar');
 
 let _navigator;
 
