@@ -22,7 +22,10 @@ let {
   Text,
   View,
   DrawerLayoutAndroid,
-  ToolbarAndroid
+  ToolbarAndroid,
+  ToastAndroid,
+  BackAndroid,
+  TouchableHighlight
 } = React;
 
 let DrawerList = require('./drawerList');
@@ -32,6 +35,7 @@ let Dashboard = React.createClass({
     let content = (
     <View style={styles.container}>
       <View style={styles.bottomMenu}>
+        <TouchableHighlight />
       </View>
     </View>);
     let title = 'Title';

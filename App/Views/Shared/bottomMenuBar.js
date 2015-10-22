@@ -18,7 +18,6 @@ let React = require('react-native');
 let {
   Text,
   View,
-  Image,
   StyleSheet,
   Dimensions,
   TouchableHighlight
@@ -27,6 +26,17 @@ let {
 let Configs = require('../../configs');
 
 let BottomMenuBar = React.createClass({
+
+  getInitialState() {
+    return {
+      currentTab: Configs.appTabs.fav // switch to fav tab by default
+    }
+  },
+
+  componentDidMount() {
+    // Set selected style for current tab
+    // this.refs[this.props.navigator.name]
+  },
 
   render() {
     return (
@@ -119,13 +129,10 @@ let BottomMenuBar = React.createClass({
 let styles = StyleSheet.create({
   menubar: {
     backgroundColor: '#16A085',
-    height: 56,
-    flexDirection: 'row',
+    height: 56
   },
   menu: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1
+    flex: 0
   },
   menuText: {
     fontSize: 14,
