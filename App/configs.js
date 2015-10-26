@@ -24,11 +24,13 @@ var Configs = {
     ABOUT: 'about'
   },
 
-  appTabs: {
-    fav: '常用',
-    sms: '短信',
-    quota: '流量',
-    eshop: '商城'
+  colors: {
+    greenDark: '#16A085',
+    greenLight: '#1ABC9C'
+  },
+
+  literals: {
+    title: 'CardManager'
   }
 };
 

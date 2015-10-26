@@ -27,6 +27,7 @@ let {
 
 let DrawerList = require('./drawerList');
 let Button = require('./Shared/button');
+let Configs = require('../configs');
 let DRAWER_WIDTH_LEFT = 96;
 let Dashboard = React.createClass({
   render() {
@@ -50,7 +51,6 @@ let Dashboard = React.createClass({
         </Button>
       </View>
     </View>);
-    let title = 'CardManager';
     return (
       <DrawerLayoutAndroid
         ref={(drawer) => { this.drawer = drawer; }}
@@ -60,7 +60,7 @@ let Dashboard = React.createClass({
         renderNavigationView={this._renderNavigationView}>
         <View style={styles.container}>
           <ToolbarAndroid
-            title={title}
+            title={Configs.literals.title}
             titleColor="white"
             navIcon={require('image!ic_drawer')}
             logo={require('image!ic_launcher')}
@@ -87,7 +87,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#FAFAFA',
   },
   toolbar: {
-    backgroundColor: '#16A085',
+    backgroundColor: Configs.colors.greenDark,
     height: 56,
   },
   content: {

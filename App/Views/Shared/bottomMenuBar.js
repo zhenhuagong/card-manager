@@ -139,7 +139,7 @@ let BottomMenuBar = React.createClass({
 
 let styles = StyleSheet.create({
   menubar: {
-    backgroundColor: '#16A085',
+    backgroundColor: Configs.colors.greenDark,
     height: 56,
     flexDirection: 'row'
   },
@@ -153,7 +153,7 @@ let styles = StyleSheet.create({
     color: 'white',
   },
   currentMenu: {
-    backgroundColor: '#1ABC9C'
+    backgroundColor: Configs.colors.greenLight
   }
 });
 

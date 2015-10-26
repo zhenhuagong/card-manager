@@ -88,11 +88,11 @@ let DrawerList = React.createClass({
 let styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1ABC9C',
+    backgroundColor: Configs.colors.greenLight,
   },
   header: {
     height: 56,
-    backgroundColor: '#16A085',
+    backgroundColor: Configs.colors.greenDark,
   },
   menuText: {
     fontSize: 14,
