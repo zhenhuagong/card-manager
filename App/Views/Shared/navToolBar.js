@@ -47,7 +47,7 @@ let NavToolbar = React.createClass({
 
 let styles = StyleSheet.create({
   toolbar: {
-    backgroundColor: '#16A085',
+    backgroundColor: '#1ABC9C',
     height: 56
   }
 });

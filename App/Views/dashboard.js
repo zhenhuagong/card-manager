@@ -21,19 +21,36 @@ let {
   StyleSheet,
   Text,
   View,
-  DrawerLayoutAndroid
+  DrawerLayoutAndroid,
+  ToolbarAndroid
 } = React;
 
 let DrawerList = require('./drawerList');
+let Button = require('./Shared/button');
 let DRAWER_WIDTH_LEFT = 96;
 let Dashboard = React.createClass({
   render() {
     let content = (
-    <View style={styles.container}>
-      <View style={styles.bottomMenu}>
+    <View style={styles.content}>
+      <Text style={styles.welcome}>
+        欢迎登陆，DEF001
+      </Text>
+      <Text style={styles.instructions}>
+        短信充值总数：1000000
+      </Text>
+      <Text style={styles.instructions}>
+        已发短信总数：6740
+      </Text>
+      <Text style={styles.instructions}>
+        剩余短信总数：993260
+      </Text>
+      <View style={styles.button}>
+        <Button onPress={this._login}>
+          <Text>卡详情查询</Text>
+        </Button>
       </View>
     </View>);
-    let title = 'Title';
+    let title = 'CardManager';
     return (
       <DrawerLayoutAndroid
         ref={(drawer) => { this.drawer = drawer; }}
@@ -72,6 +89,25 @@ var styles = StyleSheet.create({
   toolbar: {
     backgroundColor: '#16A085',
     height: 56,
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF'
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+  button: {
+    marginTop: 20
   }
 });
 

@@ -70,7 +70,7 @@ let CardManager = React.createClass({
         return (
           <View style={styles.container}>
             <Dashboard navigator={navigator} name={route.name}/>
-            <BottomMenuBar navigator={navigator} name={route.name}/>
+            <BottomMenuBar current={Configs.routes.DASHBOARD} navigator={navigator} name={route.name}/>
           </View>
         );
       // index: 1
@@ -79,7 +79,7 @@ let CardManager = React.createClass({
           <View style={styles.container}>
             <NavToolbar navIcon={true} navigator={navigator}/>
             <SMSManagement navigator={navigator} name={route.name}/>
-            <BottomMenuBar navigator={navigator} name={route.name}/>
+            <BottomMenuBar current={Configs.routes.SMS} navigator={navigator} name={route.name}/>
           </View>
         );
       // index: 2
@@ -88,7 +88,7 @@ let CardManager = React.createClass({
           <View style={styles.container}>
             <NavToolbar navIcon={true} navigator={navigator}/>
             <QuotaManagement navigator={navigator} name={route.name}/>
-            <BottomMenuBar navigator={navigator} name={route.name}/>
+            <BottomMenuBar current={Configs.routes.QUOTA} navigator={navigator} name={route.name}/>
           </View>
         );
       // index: 3
@@ -97,7 +97,7 @@ let CardManager = React.createClass({
           <View style={styles.container}>
             <NavToolbar navIcon={true} navigator={navigator}/>
             <EShop navigator={navigator} name={route.name}/>
-            <BottomMenuBar navigator={navigator} name={route.name}/>
+            <BottomMenuBar current={Configs.routes.ESHOP} navigator={navigator} name={route.name}/>
           </View>
         );
       // index: 4

@@ -27,21 +27,42 @@ let {
 let Configs = require('../../configs');
 
 let BottomMenuBar = React.createClass({
-
   render() {
+    let menuStyles = {
+      dashboard: [styles.menu],
+      sms: [styles.menu],
+      quota: [styles.menu],
+      eshop: [styles.menu]
+    };
+    switch(this.props.current) {
+      case Configs.routes.DASHBOARD:
+        menuStyles.dashboard.push(styles.currentMenu);
+        break;
+      case Configs.routes.SMS:
+        menuStyles.sms.push(styles.currentMenu);
+        break;
+      case Configs.routes.QUOTA:
+        menuStyles.quota.push(styles.currentMenu);
+        break;
+      case Configs.routes.ESHOP:
+        menuStyles.eshop.push(styles.currentMenu);
+        break;
+      default:
+        break;
+    }
     return (
       <View style={styles.menubar}>
-        <TouchableHighlight style={styles.menu} ref={Configs.routes.DASHBOARD} onPress={this._goFav}>
+        <TouchableHighlight style={menuStyles.dashboard} ref={Configs.routes.DASHBOARD} onPress={this._goFav}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
             <Image
               source={require('image!ic_explore_white_24dp')}
               style={{width: 24, height: 24, marginLeft: 6, marginRight: 6}} />
             <Text style={styles.menuText}>
-              常用
+              概览
             </Text>
           </View>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.menu} ref={Configs.routes.SMS} onPress={this._goSMS}>
+        <TouchableHighlight style={menuStyles.sms} ref={Configs.routes.SMS} onPress={this._goSMS}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
             <Image
               source={require('image!ic_explore_white_24dp')}
@@ -51,7 +72,7 @@ let BottomMenuBar = React.createClass({
             </Text>
           </View>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.menu} ref={Configs.routes.QUOTA} onPress={this._goQuota}>
+        <TouchableHighlight style={menuStyles.quota} ref={Configs.routes.QUOTA} onPress={this._goQuota}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
             <Image
               source={require('image!ic_explore_white_24dp')}
@@ -61,7 +82,7 @@ let BottomMenuBar = React.createClass({
             </Text>
           </View>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.menu} ref={Configs.routes.ESHOP} onPress={this._goEShop}>
+        <TouchableHighlight style={menuStyles.eshop} ref={Configs.routes.ESHOP} onPress={this._goEShop}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
             <Image
               source={require('image!ic_explore_white_24dp')}
@@ -130,6 +151,9 @@ let styles = StyleSheet.create({
   menuText: {
     fontSize: 14,
     color: 'white',
+  },
+  currentMenu: {
+    backgroundColor: '#1ABC9C'
   }
 });
 
