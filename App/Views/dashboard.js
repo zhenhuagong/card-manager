@@ -21,8 +21,12 @@ let {
   StyleSheet,
   Text,
   View,
-  DrawerLayoutAndroid
+  DrawerLayoutAndroid,
+  TouchableHighlight
 } = React;
+
+let RowSection = require('./Shared/rowSection');
+let rowSectionStyle = {height: 50};
 
 let DrawerList = require('./drawerList');
 let DRAWER_WIDTH_LEFT = 96;
@@ -30,6 +34,20 @@ let Dashboard = React.createClass({
   render() {
     let content = (
     <View style={styles.container}>
+      <View>
+        <RowSection style={rowSectionStyle}>
+          <TouchableHighlight>
+            <View style={{flexDirection: 'column', alignItems: 'center', padding: 5}}>
+              <Image
+                source={require('image!ic_explore_white_24dp')}
+                style={{width: 24, height: 24, marginLeft: 6, marginRight: 6}} />
+              <Text style={styles.menuText}>
+                短信管理
+              </Text>
+            </View>
+          </TouchableHighlight>
+        </RowSection>
+      </View>
       <View style={styles.bottomMenu}>
       </View>
     </View>);
