@@ -1,8 +1,8 @@
 /**
  *
- * index.js
+ * send.android.js
 
- * Description:       This file defines component of login for android platform.
+ * Description:       Send SMS.
  * Version:           0.0.1
  * Author:            Gong Zhenhua
  * Author URI:        http://allmyverse.com
@@ -15,7 +15,6 @@
 let React = require('react-native');
 let { StyleSheet, Text, View } = React;
 
-let BackDrop = require('../Shared/backdrop');
 let Input = require('../Shared/input');
 let Button = require('../Shared/button');
 let Request = require('../../Networks/request');
@@ -24,9 +23,9 @@ let Configs = require('../../configs');
 let FormBlock = React.createClass({
   render() {
     let formElementStyle = {
-      flexDirection: 'row',   // row direction by default
+      flexDirection: 'column',   // column direction by default
       alignItems: 'center',
-      height: 50
+      marginTop: 20
     };
     return (
       <View style={[formElementStyle, this.props.style]}>
@@ -36,57 +35,49 @@ let FormBlock = React.createClass({
   }
 });
 
-let Login = React.createClass({
+let SendSMS = React.createClass({
   getInitialState() {
     return {
-      username: '',
-      pwd: ''
+      phoneNumbers: '',
+      content: ''
     };
   },
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>欢迎登陆</Text>
         <FormBlock>
-          <Text style={styles.inputLabel}>用户名：</Text>
-          <Input ref='username' style={styles.inputStyle} onBlur={this._setUsername}/>
+          <Text style={styles.inputLabel}>发送号码：</Text>
+          <Input style={styles.inputStyle} onBlur={this._setPhoneNumbers}/>
         </FormBlock>
         <FormBlock>
-          <Text style={styles.inputLabel}>密码：</Text>
-          <Input ref='pwd' style={styles.inputStyle} onBlur={this._setPassword}/>
+          <Text style={styles.inputLabel}>发送内容：</Text>
+          <Input style={styles.inputStyle} onBlur={this._setContent}/>
+          <Text style={styles.registerText}>（通配符: 姓名:%name% , 尊称:%title%）</Text>
         </FormBlock>
         <FormBlock style={{marginTop: 30}}>
-          <Button ref='login' onPress={this._login}>
-            <Text>登陆</Text>
+          <Button onPress={this._send}>
+            <Text>发送</Text>
           </Button>
-          <View style={styles.forgetPwd}>
-            <Text>忘记密码?</Text>
-          </View>
-        </FormBlock>
-        <FormBlock>
-          <View style={styles.registerView}>
-            <Text style={styles.registerText}>免费注册>></Text>
-          </View>
         </FormBlock>
       </View>
       )
   },
 
-  _setUsername(name) {
-    this.setState({ username: name});
+  _setPhoneNumbers(phoneNumbers) {
+    this.setState({ phoneNumbers});
   },
 
-  _setPassword(pwd) {
-    this.setState({ pwd: pwd });
+  _setContent(content) {
+    this.setState({ content });
   },
 
-  _login() {
+  _send() {
     if (this._validateInput()) {
       // Send a post request to login api
-      Request.post(Configs.api.loginUrl, {
-        username: this.state.username,
-        password: this.state.pwd
+      Request.post(Configs.api.sendSMS, {
+        phoneNumbers: this.state.phoneNumbers,
+        content: this.state.content
       }).then((result) => {
 
       }).catch((err) => {
@@ -98,7 +89,7 @@ let Login = React.createClass({
   },
 
   _validateInput() {
-    if (!this.state.username || !this.state.pwd) {
+    if (!this.state.phoneNumbers || !this.state.content) {
       return false;
     } else {
       return true;
@@ -126,20 +117,12 @@ let styles = StyleSheet.create({
     height: 40
   },
   inputLabel: {
-    width: 60,
-    textAlign: 'right',
-  },
-  forgetPwd: {
-    borderBottomColor: 'black',
-    borderBottomWidth: 1
-  },
-  registerView: {
-    borderBottomColor: 'orange',
-    borderBottomWidth: 1
+    width: 180,
+    textAlign: 'left'
   },
   registerText: {
     color: 'orange'
   }
 });
 
-module.exports = Login;
+module.exports = SendSMS;

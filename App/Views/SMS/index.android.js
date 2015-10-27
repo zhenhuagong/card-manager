@@ -1,31 +1,46 @@
 'use strict';
 
-var React = require('react-native');
-var {
+let React = require('react-native');
+let {
   StyleSheet,
   Text,
   View,
 } = React;
 
-var SMS = React.createClass({
-  render: function() {
+let Button = require('../Shared/button');
+let Configs = require('../../configs');
+let SMS = React.createClass({
+  _sendSMS() {
+    this.props.navigator.push({
+      name: Configs.routes.SMS_SEND
+    });
+  },
+
+  _listSMS() {
+    this.props.navigator.push({
+      name: Configs.routes.SMS_LIST
+    });
+  },
+
+  render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
+        <View style={styles.button}>
+          <Button onPress={this._sendSMS}>
+            <Text>发送短信</Text>
+          </Button>
+        </View>
+        <View style={styles.button}>
+          <Button onPress={this._listSMS}>
+            <Text>已发短信</Text>
+          </Button>
+        </View>
       </View>
     );
   }
 });
 
-var styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -42,6 +57,9 @@ var styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  button: {
+    marginTop: 20
+  }
 });
 
 module.exports= SMS;

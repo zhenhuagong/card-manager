@@ -100,8 +100,7 @@ let BottomMenuBar = React.createClass({
     let _nagiavtor = this.props.navigator;
     if (_nagiavtor.name !== Configs.routes.DASHBOARD) {
       _nagiavtor.push({
-        name: Configs.routes.DASHBOARD,
-        index: 0
+        name: Configs.routes.DASHBOARD
       });
     }
   },
@@ -110,8 +109,7 @@ let BottomMenuBar = React.createClass({
     let _nagiavtor = this.props.navigator;
     if (_nagiavtor.name !== Configs.routes.SMS) {
       _nagiavtor.push({
-        name: Configs.routes.SMS,
-        index: 1
+        name: Configs.routes.SMS
       });
     }
   },
@@ -120,8 +118,7 @@ let BottomMenuBar = React.createClass({
     let _nagiavtor = this.props.navigator;
     if (_nagiavtor.name !== Configs.routes.QUOTA) {
       _nagiavtor.push({
-        name: Configs.routes.QUOTA,
-        index: 2
+        name: Configs.routes.QUOTA
       });
     }
   },
@@ -130,8 +127,7 @@ let BottomMenuBar = React.createClass({
     let _nagiavtor = this.props.navigator;
     if (_nagiavtor.name !== Configs.routes.ESHOP) {
       _nagiavtor.push({
-        name: Configs.routes.ESHOP,
-        index: 3
+        name: Configs.routes.ESHOP
       });
     }
   }

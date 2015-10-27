@@ -20,6 +20,8 @@ let Login = require('./App/Views/Login');
 let About = require('./App/Views/about');
 let Dashboard = require('./App/Views/dashboard');
 let SMSManagement = require('./App/Views/SMS');
+let SMSSend = require('./App/Views/SMS/send');
+let SMSList = require('./App/Views/SMS/list');
 let QuotaManagement = require('./App/Views/Quota');
 let EShop = require('./App/Views/EShop');
 let NavToolbar = require('./App/Views/Shared/navToolBar');
@@ -79,6 +81,22 @@ let CardManager = React.createClass({
           <View style={styles.container}>
             <NavToolbar navIcon={true} navigator={navigator}/>
             <SMSManagement navigator={navigator} name={route.name}/>
+            <BottomMenuBar current={Configs.routes.SMS} navigator={navigator} name={route.name}/>
+          </View>
+        );
+      case Configs.routes.SMS_SEND:
+        return (
+          <View style={styles.container}>
+            <NavToolbar navIcon={true} navigator={navigator}/>
+            <SMSSend navigator={navigator} name={route.name}/>
+            <BottomMenuBar current={Configs.routes.SMS} navigator={navigator} name={route.name}/>
+          </View>
+        );
+      case Configs.routes.SMS_LIST:
+        return (
+          <View style={styles.container}>
+            <NavToolbar navIcon={true} navigator={navigator}/>
+            <SMSList navigator={navigator} name={route.name}/>
             <BottomMenuBar current={Configs.routes.SMS} navigator={navigator} name={route.name}/>
           </View>
         );
