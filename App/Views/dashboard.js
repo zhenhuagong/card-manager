@@ -22,36 +22,39 @@ let {
   Text,
   View,
   DrawerLayoutAndroid,
-  TouchableHighlight
+  TouchableHighlight,
+  ToolbarAndroid
 } = React;
 
 let RowSection = require('./Shared/rowSection');
 let rowSectionStyle = {height: 50};
 
 let DrawerList = require('./drawerList');
+let Button = require('./Shared/button');
+let Configs = require('../configs');
 let DRAWER_WIDTH_LEFT = 96;
 let Dashboard = React.createClass({
   render() {
     let content = (
-    <View style={styles.container}>
-      <View>
-        <RowSection style={rowSectionStyle}>
-          <TouchableHighlight>
-            <View style={{flexDirection: 'column', alignItems: 'center', padding: 5}}>
-              <Image
-                source={require('image!ic_explore_white_24dp')}
-                style={{width: 24, height: 24, marginLeft: 6, marginRight: 6}} />
-              <Text style={styles.menuText}>
-                短信管理
-              </Text>
-            </View>
-          </TouchableHighlight>
-        </RowSection>
-      </View>
-      <View style={styles.bottomMenu}>
+    <View style={styles.content}>
+      <Text style={styles.welcome}>
+        欢迎登陆，DEF001
+      </Text>
+      <Text style={styles.instructions}>
+        短信充值总数：1000000
+      </Text>
+      <Text style={styles.instructions}>
+        已发短信总数：6740
+      </Text>
+      <Text style={styles.instructions}>
+        剩余短信总数：993260
+      </Text>
+      <View style={styles.button}>
+        <Button onPress={this._login}>
+          <Text>卡详情查询</Text>
+        </Button>
       </View>
     </View>);
-    let title = 'Title';
     return (
       <DrawerLayoutAndroid
         ref={(drawer) => { this.drawer = drawer; }}
@@ -61,7 +64,7 @@ let Dashboard = React.createClass({
         renderNavigationView={this._renderNavigationView}>
         <View style={styles.container}>
           <ToolbarAndroid
-            title={title}
+            title={Configs.literals.title}
             titleColor="white"
             navIcon={require('image!ic_drawer')}
             logo={require('image!ic_launcher')}
@@ -88,8 +91,27 @@ var styles = StyleSheet.create({
     backgroundColor: '#FAFAFA',
   },
   toolbar: {
-    backgroundColor: '#16A085',
+    backgroundColor: Configs.colors.greenDark,
     height: 56,
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF'
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+  button: {
+    marginTop: 20
   }
 });
 

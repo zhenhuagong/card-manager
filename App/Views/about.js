@@ -11,20 +11,21 @@
  */
 
 
-var React = require('react-native');
-var {
+let React = require('react-native');
+let {
   AppRegistry,
   StyleSheet,
   Text,
   View,
 } = React;
 
-var About = React.createClass({
-  render: function() {
+let Configs = require('../configs');
+let About = React.createClass({
+  render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          欢迎使用CardManager!
+          欢迎使用{Configs.literals.title}!
         </Text>
         <Text style={styles.instructions}>
           版本号 v0.0.1
@@ -37,7 +38,7 @@ var About = React.createClass({
   }
 });
 
-var styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',

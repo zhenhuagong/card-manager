@@ -9,7 +9,12 @@
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
+'use strict';
 
+let React = require('react-native');
+let {
+  View,
+} = React;
 
 let RowSection = React.createClass({
 

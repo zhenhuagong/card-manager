@@ -14,12 +14,12 @@
 'use strict';
 
 let React = require('react-native');
-
 let {
   StyleSheet,
   ToolbarAndroid
 } = React;
 
+let Configs = require('../../configs');
 let NavToolbar = React.createClass({
 
   render() {
@@ -31,7 +31,7 @@ let NavToolbar = React.createClass({
           navIcon={{uri: "ic_arrow_back_white_24dp", isStatic: true}}
           onIconClicked={this.props.navigator.pop}
           titleColor="#fff"
-          title='CardManager' />
+          title={Configs.literals.title} />
       )
     }
     return (
@@ -47,7 +47,7 @@ let NavToolbar = React.createClass({
 
 let styles = StyleSheet.create({
   toolbar: {
-    backgroundColor: '#16A085',
+    backgroundColor: Configs.colors.greenLight,
     height: 56
   }
 });
