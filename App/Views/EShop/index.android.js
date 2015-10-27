@@ -1,14 +1,14 @@
 'use strict';
 
-var React = require('react-native');
-var {
+let React = require('react-native');
+let {
   StyleSheet,
   Text,
   View,
 } = React;
 
-var Eshop = React.createClass({
-  render: function() {
+let Eshop = React.createClass({
+  render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -25,7 +25,7 @@ var Eshop = React.createClass({
   }
 });
 
-var styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',

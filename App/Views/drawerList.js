@@ -33,8 +33,6 @@ let DrawerList = React.createClass({
       isLoading: false,
     };
   },
-  componentDidMount() {
-  },
 
   render(){
     let TouchableElement = TouchableHighlight;
