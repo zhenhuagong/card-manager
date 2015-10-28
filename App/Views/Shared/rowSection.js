@@ -29,3 +29,5 @@ let RowSection = React.createClass({
     );
   }
 });
+
+module.exports = RowSection;

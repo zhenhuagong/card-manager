@@ -37,14 +37,14 @@ let Login = React.createClass({
         <Text style={styles.title}>欢迎登陆</Text>
         <RowSection style={rowSectionStyle}>
           <Text style={styles.inputLabel}>用户名：</Text>
-          <Input ref='username' style={styles.inputStyle} onBlur={this._setUsername}/>
+          <Input style={styles.inputStyle} onBlur={this._setUsername}/>
         </RowSection>
         <RowSection style={rowSectionStyle}>
           <Text style={styles.inputLabel}>密码：</Text>
-          <Input ref='pwd' style={styles.inputStyle} onBlur={this._setPassword}/>
+          <Input style={styles.inputStyle} onBlur={this._setPassword}/>
         </RowSection>
         <RowSection style={rowSectionStyle} style={{marginTop: 30}}>
-          <Button ref='pwd' onPress={this._login}>
+          <Button onPress={this._login}>
             <Text>登陆</Text>
           </Button>
           <View style={styles.forgetPwd}>
