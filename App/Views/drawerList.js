@@ -33,8 +33,6 @@ let DrawerList = React.createClass({
       isLoading: false,
     };
   },
-  componentDidMount() {
-  },
 
   render(){
     let TouchableElement = TouchableHighlight;
@@ -71,16 +69,14 @@ let DrawerList = React.createClass({
   _gotoLogin() {
     console.log('go to login');
     this.props.navigator.push({
-      name: Configs.routes.LOGIN,
-      index: 4
+      name: Configs.routes.LOGIN
     });
   },
 
   _gotoAbout() {
     console.log('go to about');
     this.props.navigator.push({
-      name: Configs.routes.ABOUT,
-      index: 5
+      name: Configs.routes.ABOUT
     });
   },
 });

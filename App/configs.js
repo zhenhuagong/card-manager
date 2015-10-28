@@ -12,12 +12,17 @@
 
 var Configs = {
   api: {
-
+    login: '',
+    sendSMS: '',
+    listSMS: '',
+    queryQuota: ''
   },
 
   routes: {
     DASHBOARD: 'dashboard',
     SMS: 'sms_management',
+    SMS_SEND: 'sms_send',
+    SMS_LIST: 'sms_list',
     QUOTA: 'quota_management',
     ESHOP: 'eshop',
     LOGIN: 'login',

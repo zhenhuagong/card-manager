@@ -14,7 +14,8 @@ For android platform, you can bundle it into an .apk file then run it on an real
 
 You are welcome to add any feature or fix a bug for this project.
 
-If React Native is something new to you, this tutorial may be some of help: [Development Tutorial - React Native](https://facebook.github.io/react-native/docs/tutorial.html)
+If React Native is something new to you, this tutorial may be some of help:
+- [Development Tutorial - React Native](https://facebook.github.io/react-native/docs/tutorial.html)
 
 *NOTE: You NEED to know React and Javascript before developing.*
 
@@ -47,6 +48,11 @@ $npm install
 $adb reverse tcp:8081 tcp:8081  # Optional
 $react-native run-android
 ```
+_A protip: Add a line into `scripts` of `package.json`_
+```
+"android": "adb reverse tcp:8081 tcp:8081 && react-native run-android"
+```
+_then you can use `npm run android` to start you project_
 
 #### On iOS
 

@@ -7,7 +7,7 @@ let {
   View,
 } = React;
 
-let Quota = React.createClass({
+let SMSList = React.createClass({
   render() {
     return (
       <View style={styles.container}>
@@ -44,4 +44,4 @@ let styles = StyleSheet.create({
   },
 });
 
-module.exports= Quota;
+module.exports= SMSList;
