@@ -1,20 +1,36 @@
-var SuperAgent = require('superagent');
-var P = require('bluebird');
+let Config = require('../configs');
+let QS = require('./qs');
 
-var Request = {
-  post(url, data) {
-    return new P((resolve, reject) => {
-      SuperAgent.post(url)
-        .type('form')
-        .send(data)
-        .end((err, res) => {
-          if (err || !res.body) {
-            reject(err);
-          } else {
-            resolve(res.body);
-          }
-        });
+let Request = {
+  post(endpoint, data) {
+    return fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+  },
+
+  get(endpoint, queries, cb) {
+    let url = endpoint + '?' + QS.stringify(queries);
+    return fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
     })
+    .then((response) => response.json())
+    .then((responseData) => {
+      cb && cb(responseData);
+    })
+    .catch((error) => {
+      console.log('get request error');
+      console.log(error);
+    })
+    .done();
   }
 }
 

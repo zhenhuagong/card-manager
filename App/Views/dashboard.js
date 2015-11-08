@@ -33,28 +33,69 @@ let DrawerList = require('./drawerList');
 let Button = require('./Shared/button');
 let Configs = require('../configs');
 let DRAWER_WIDTH_LEFT = 96;
+let Request = require('../Networks/request');
+
 let Dashboard = React.createClass({
+  getInitialState() {
+    return { loaded: false };
+  },
+
+  componentDidMount() {
+    Request.get(
+      Configs.endpoints.overview,
+      {MSISDN:'1064805103117'},
+      (data) => {
+      console.log('got data' + JSON.stringify(data));
+      let cardInfo = data.pd;
+      let status = cardInfo.onoff === 1 ? '开机' : '关机';
+      this.setState({
+        id: cardInfo.MSISDN,
+        balance: cardInfo.balance,
+        sms: cardInfo.sms,
+        gprs: cardInfo.gprs,
+        status: status,
+        network: cardInfo.apn + ' / ' + cardInfo.rat,
+        loaded: true
+      });
+    })
+  },
+
   render() {
     let content = (
-    <View style={styles.content}>
       <Text style={styles.welcome}>
-        欢迎登陆，DEF001
+        正在加载信息...
       </Text>
-      <Text style={styles.instructions}>
-        短信充值总数：1000000
-      </Text>
-      <Text style={styles.instructions}>
-        已发短信总数：6740
-      </Text>
-      <Text style={styles.instructions}>
-        剩余短信总数：993260
-      </Text>
-      <View style={styles.button}>
-        <Button onPress={this._login}>
-          <Text>卡详情查询</Text>
-        </Button>
-      </View>
-    </View>);
+    );
+    if (this.state.loaded) {
+      content = (
+        <View style={styles.content}>
+          <Text style={styles.welcome}>
+            欢迎登陆，{this.state.id}
+          </Text>
+          <Text style={styles.instructions}>
+            余额：{this.state.balance}
+          </Text>
+          <Text style={styles.instructions}>
+            当月短信使用量：{this.state.sms}
+          </Text>
+          <Text style={styles.instructions}>
+            当月gprs使用量：{this.state.gprs}
+          </Text>
+          <Text style={styles.instructions}>
+            当前卡状态：{this.state.status}
+          </Text>
+          <Text style={styles.instructions}>
+            网络：{this.state.network}
+          </Text>
+          <View style={styles.button}>
+            <Button onPress={this._login}>
+              <Text>卡详情查询</Text>
+            </Button>
+          </View>
+        </View>
+      );
+    };
+
     return (
       <DrawerLayoutAndroid
         ref={(drawer) => { this.drawer = drawer; }}
@@ -75,6 +116,7 @@ let Dashboard = React.createClass({
         </View>
       </DrawerLayoutAndroid>
     );
+
   },
 
   _renderNavigationView(){

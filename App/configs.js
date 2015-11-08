@@ -10,9 +10,14 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-var Configs = {
-  api: {
-    login: '',
+let apiServer = 'http://101.200.176.31:8080/zxtd';
+
+let Configs = {
+  endpoints: {
+    login: apiServer + '/appuser/login', // 登陆
+    overview: apiServer + '/appbusi/queryinfo',   //查询汇总信息
+    history: apiServer + '/appbusi/qryusedbydate',  //查询短信和GPRS历史使用量
+    cardinfo: apiServer + '/appbusi/qrycardinfo',   //查询号码信息
     sendSMS: '',
     listSMS: '',
     queryQuota: ''
