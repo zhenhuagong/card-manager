@@ -13,6 +13,8 @@
 let apiServer = 'http://101.200.176.31:8080/zxtd';
 
 let Configs = {
+  timeout: 3000,  // network request timeout
+
   endpoints: {
     login: apiServer + '/appuser/login', // 登陆
     overview: apiServer + '/appbusi/queryinfo',   //查询汇总信息
