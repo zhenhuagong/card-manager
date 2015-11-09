@@ -20,6 +20,8 @@ let Input = require('../Shared/input');
 let Button = require('../Shared/button');
 let Request = require('../../Networks/request');
 let Configs = require('../../configs');
+let MD5 = require('crypto-js/md5');
+let Moment = require('moment');
 
 let RowSection = require('../Shared/rowSection');
 let rowSectionStyle = {height: 50, alignItems: 'center'};
@@ -70,15 +72,18 @@ let Login = React.createClass({
 
   _login() {
     if (this._validateInput()) {
-      // Send a post request to login api
-      Request.post(Configs.api.loginUrl, {
-        username: this.state.username,
-        password: this.state.pwd
-      }).then((result) => {
-
-      }).catch((err) => {
-
-      })
+      let fkey = MD5(this.state.username + Moment().format('YYYYMMDD') + ',fh,');
+      Request.get(
+        Configs.endpoints.login,
+        {
+          USERNAME: this.state.username,
+          PASSWORD: this.state.pwd,
+          FKEY: fkey.toString()   // must call `toString` here
+        },
+        (data) => {
+          console.log('got login data' + JSON.stringify(data));
+        }
+      );
     } else {
       // popup an error message
     }
