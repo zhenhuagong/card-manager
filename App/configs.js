@@ -13,7 +13,7 @@
 let apiServer = 'http://101.200.176.31:8080/zxtd';
 
 let Configs = {
-  timeout: 3000,  // network request timeout
+  timeout: 10000,  // network request timeout, 10s
 
   endpoints: {
     login: apiServer + '/appuser/login', // 登陆
@@ -43,6 +43,10 @@ let Configs = {
 
   literals: {
     title: 'CardManager'
+  },
+
+  errorMsg: {
+    fetchTimeout: '网络超时。\r\n请检查网络连接，稍后再试。'
   }
 };
 

@@ -5,7 +5,7 @@ let QS = require('./qs');
 let timeout = (ms, promise) => {
   return new Promise(function(resolve, reject) {
     setTimeout(function() {
-      reject(new Error("fetch timeout"))
+      reject(new Error(Config.errorMsg.fetchTimeout))
     }, ms);
     promise.then(resolve, reject);
   })
@@ -22,17 +22,15 @@ let Request = {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
-      })
+      }))
       .then((response) => response.json())
       .then((responseData) => {
-        cb && cb(responseData);
+        cb.onSuccess && cb.onSuccess(responseData);
       })
       .catch((error) => {
-        console.log('post request error');
-        console.log(error);
+        cb.onFail && cb.onFail(error.message);
       })
       .done();
-    );
   },
 
   get(endpoint, queries, cb) {
@@ -45,17 +43,15 @@ let Request = {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
-      })
+      }))
       .then((response) => response.json())
       .then((responseData) => {
-        cb && cb(responseData);
+        cb.onSuccess && cb.onSuccess(responseData);
       })
       .catch((error) => {
-        console.log('get request error');
-        console.log(error);
+        cb.onFail && cb.onFail(error.message);
       })
       .done();
-    );
   }
 };
 

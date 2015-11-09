@@ -44,20 +44,29 @@ let Dashboard = React.createClass({
     Request.get(
       Configs.endpoints.overview,
       {MSISDN:'1064805103117'},
-      (data) => {
-      console.log('got data' + JSON.stringify(data));
-      let cardInfo = data.pd;
-      let status = cardInfo.onoff === 1 ? '开机' : '关机';
-      this.setState({
-        id: cardInfo.MSISDN,
-        balance: cardInfo.balance,
-        sms: cardInfo.sms,
-        gprs: cardInfo.gprs,
-        status: status,
-        network: cardInfo.apn + ' / ' + cardInfo.rat,
-        loaded: true
-      });
-    })
+      {
+        onSuccess: (data) => {
+          console.log('got data' + JSON.stringify(data));
+          let cardInfo = data.pd;
+          let status = cardInfo.onoff === 1 ? '开机' : '关机';
+          this.setState({
+            id: cardInfo.MSISDN,
+            balance: cardInfo.balance,
+            sms: cardInfo.sms,
+            gprs: cardInfo.gprs,
+            status: status,
+            network: cardInfo.apn + ' / ' + cardInfo.rat,
+            loaded: true
+          });
+        },
+        onFail: (error) => {
+          this.setState({
+            error: error,
+            loaded: false
+          });
+        }
+      }
+    );
   },
 
   render() {
@@ -94,7 +103,15 @@ let Dashboard = React.createClass({
           </View>
         </View>
       );
-    };
+    } else {
+      if (this.state.error) {
+        content = (
+          <Text style={styles.welcome}>
+            {this.state.error}
+          </Text>
+        );
+      }
+    }
 
     return (
       <DrawerLayoutAndroid

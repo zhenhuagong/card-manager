@@ -80,8 +80,13 @@ let Login = React.createClass({
           PASSWORD: this.state.pwd,
           FKEY: fkey.toString()   // must call `toString` here
         },
-        (data) => {
-          console.log('got login data' + JSON.stringify(data));
+        {
+          onSuccess: (data) => {
+            console.log('got login data' + JSON.stringify(data));
+          },
+          onFail: (error) => {
+            console.log('got error when login ' + error);
+          }
         }
       );
     } else {

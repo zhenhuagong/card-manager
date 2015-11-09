@@ -78,6 +78,11 @@ let SendSMS = React.createClass({
       Request.post(Configs.api.sendSMS, {
         phoneNumbers: this.state.phoneNumbers,
         content: this.state.content
+      }, {
+        onSuccess: (data) => {
+        },
+        onFail: (error) => {
+        }
       }).then((result) => {
 
       }).catch((err) => {
