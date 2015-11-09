@@ -27,7 +27,7 @@ let NavToolbar = React.createClass({
       return (
         <ToolbarAndroid
           style={styles.toolbar}
-          logo={require('image!ic_launcher')}
+          logo={require('../../images/ic_launcher.png')}
           navIcon={{uri: "ic_arrow_back_white_24dp", isStatic: true}}
           onIconClicked={this.props.navigator.pop}
           titleColor="#fff"
@@ -37,7 +37,7 @@ let NavToolbar = React.createClass({
     return (
       <ToolbarAndroid
         style={styles.toolbar}
-        logo={require('image!ic_launcher')}
+        logo={require('../../images/ic_launcher.png')}
         onIconClicked={this.props.navigator.pop}
         titleColor="#fff"
         title='CardManager' />

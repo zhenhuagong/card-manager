@@ -45,7 +45,7 @@ let DrawerList = React.createClass({
         <TouchableElement onPress={this._gotoLogin}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 16}}>
             <Image
-              source={require('image!ic_explore_white_24dp')}
+              source={require('../images/ic_explore_white_24dp.png')}
               style={{width: 24, height: 24, marginLeft: 16, marginRight: 16}} />
             <Text style={styles.menuText}>
                登陆
@@ -55,7 +55,7 @@ let DrawerList = React.createClass({
         <TouchableElement onPress={this._gotoAbout}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 16}}>
             <Image
-              source={require('image!ic_explore_white_24dp')}
+              source={require('../images/ic_explore_white_24dp.png')}
               style={{width: 24, height: 24, marginLeft: 16, marginRight: 16}} />
             <Text style={styles.menuText}>
               关于

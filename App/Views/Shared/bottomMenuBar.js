@@ -55,7 +55,7 @@ let BottomMenuBar = React.createClass({
         <TouchableHighlight style={menuStyles.dashboard} ref={Configs.routes.DASHBOARD} onPress={this._goFav}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
             <Image
-              source={require('image!ic_explore_white_24dp')}
+              source={require('../../images/ic_explore_white_24dp.png')}
               style={{width: 24, height: 24, marginLeft: 6, marginRight: 6}} />
             <Text style={styles.menuText}>
               概览
@@ -65,7 +65,7 @@ let BottomMenuBar = React.createClass({
         <TouchableHighlight style={menuStyles.sms} ref={Configs.routes.SMS} onPress={this._goSMS}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
             <Image
-              source={require('image!ic_explore_white_24dp')}
+              source={require('../../images/ic_explore_white_24dp.png')}
               style={{width: 24, height: 24, marginLeft: 6, marginRight: 6}} />
             <Text style={styles.menuText}>
               短信
@@ -75,7 +75,7 @@ let BottomMenuBar = React.createClass({
         <TouchableHighlight style={menuStyles.quota} ref={Configs.routes.QUOTA} onPress={this._goQuota}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
             <Image
-              source={require('image!ic_explore_white_24dp')}
+              source={require('../../images/ic_explore_white_24dp.png')}
               style={{width: 24, height: 24, marginLeft: 6, marginRight: 6}} />
             <Text style={styles.menuText}>
               流量
@@ -85,7 +85,7 @@ let BottomMenuBar = React.createClass({
         <TouchableHighlight style={menuStyles.eshop} ref={Configs.routes.ESHOP} onPress={this._goEShop}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
             <Image
-              source={require('image!ic_explore_white_24dp')}
+              source={require('../../images/ic_explore_white_24dp.png')}
               style={{width: 24, height: 24, marginLeft: 6, marginRight: 6}} />
             <Text style={styles.menuText}>
               商城
