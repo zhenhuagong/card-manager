@@ -30,8 +30,12 @@ let Configs = require('../configs');
 let DrawerList = React.createClass({
   getInitialState() {
     return {
-      isLoading: false,
+      loggedin: false,
     };
+  },
+
+  componentDidMount() {
+    this._checkLoginState();
   },
 
   render(){
@@ -39,6 +43,22 @@ let DrawerList = React.createClass({
     // if (Platform.OS === 'android') {
     //   TouchableElement = TouchableNativeFeedback;
     // }
+    let logout;
+    console.log('check loggedin in drawer ' + this.state.loggedin);
+    if (this.state.loggedin) {
+      logout = (
+        <TouchableElement onPress={this._logout}>
+          <View style={{flexDirection: 'row', alignItems: 'center', padding: 16}}>
+            <Image
+              source={require('../images/ic_explore_white_24dp.png')}
+              style={{width: 24, height: 24, marginLeft: 16, marginRight: 16}} />
+            <Text style={styles.menuText}>
+              退出
+            </Text>
+          </View>
+        </TouchableElement>
+      );
+    }
     return (
       <View style={styles.container} {...this.props}>
         <View style={styles.header}/>
@@ -62,6 +82,7 @@ let DrawerList = React.createClass({
             </Text>
           </View>
         </TouchableElement>
+        {logout}
       </View>
     );
   },
@@ -78,6 +99,43 @@ let DrawerList = React.createClass({
     this.props.navigator.push({
       name: Configs.routes.ABOUT
     });
+  },
+
+  _logout() {
+    this._removeStorage();
+    this.setState({
+      loggedin: false
+    });
+  },
+
+  async _checkLoginState() {
+    try {
+      var value = await AsyncStorage.getItem(Configs.storageKeys.logged);
+      if (value !== null){
+        this.setState({
+          loggedin: true
+        });
+      } else {
+        this.setState({
+          loggedin: false
+        });
+      }
+    } catch (error) {
+      this.setState({
+        loggedin: false
+      });
+    }
+  },
+
+  async _removeStorage() {
+    try {
+      await AsyncStorage.removeItem(Configs.storageKeys.logged);
+      this.props.navigator.push({
+        name: Configs.routes.DASHBOARD
+      });
+    } catch (error) {
+      console.log(error);
+    }
   },
 });
 
