@@ -12,11 +12,11 @@ let {
   Text,
   View,
   Navigator,
-  BackAndroid
+  BackAndroid,
+  AsyncStorage
 } = React;
 
 let Configs = require('./App/configs');
-let Login = require('./App/Views/Login');
 let About = require('./App/Views/about');
 let Dashboard = require('./App/Views/dashboard');
 let SMSManagement = require('./App/Views/SMS');
@@ -40,29 +40,15 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
 });
 
 let CardManager = React.createClass({
-  getInitialState() {
-    // check login state
-    return {
-      loginExpired: true
-    };
-  },
 
   render() {
-    console.log('enterance of app for android platform');
-    if (this.state.loginExpired) {
-      return (<View style={styles.loginContainer}>
-          <Login />
-        </View>
-      );
-    } else {
-      return (
-        <Navigator
-          style={styles.container}
-          initialRoute={{name: Configs.routes.DASHBOARD, index: 0}}
-          configureScene={() => Navigator.SceneConfigs.FadeAndroid}
-          renderScene={this._renderScene} />
-      );
-    }
+    return (
+      <Navigator
+        style={styles.container}
+        initialRoute={{name: Configs.routes.DASHBOARD, index: 0}}
+        configureScene={() => Navigator.SceneConfigs.FadeAndroid}
+        renderScene={this._renderScene} />
+    );
   },
 
   _renderScene(route, navigator) {

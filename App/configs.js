@@ -11,6 +11,7 @@
  */
 
 let apiServer = 'http://101.200.176.31:8080/zxtd';
+let storagePrefix = '@SimonGongRNWWT:';
 
 let Configs = {
   timeout: 10000,  // network request timeout, 10s
@@ -47,6 +48,10 @@ let Configs = {
 
   errorMsg: {
     fetchTimeout: '网络超时。\r\n请检查网络连接，稍后再试。'
+  },
+
+  storageKeys: {
+    logged: storagePrefix + 'logged'
   }
 };
 

@@ -13,7 +13,7 @@
 'use strict';
 
 let React = require('react-native');
-let { StyleSheet, Text, View } = React;
+let { StyleSheet, Text, View, AsyncStorage } = React;
 
 let BackDrop = require('../Shared/backdrop');
 let Input = require('../Shared/input');
@@ -25,6 +25,7 @@ let Moment = require('moment');
 
 let RowSection = require('../Shared/rowSection');
 let rowSectionStyle = {height: 50, alignItems: 'center'};
+
 let Login = React.createClass({
   getInitialState() {
     return {
@@ -85,9 +86,16 @@ let Login = React.createClass({
         {
           onSuccess: (data) => {
             console.log('got login data' + JSON.stringify(data));
+            this._setUserLogin(JSON.stringify(data.pd));
+            this.props.navigator.push({
+              name: Configs.routes.DASHBOARD
+            });
           },
           onFail: (error) => {
             console.log('got error when login ' + error);
+            this.props.navigator.push({
+              name: Configs.routes.DASHBOARD
+            });
           }
         }
       );
@@ -102,7 +110,15 @@ let Login = React.createClass({
     } else {
       return true;
     }
-  }
+  },
+
+  async _setUserLogin(info) {
+    try {
+      await AsyncStorage.setItem(Configs.storageKeys.logged, info);
+    } catch (error) {
+      console.log(error);
+    }
+  },
 });
 
 let styles = StyleSheet.create({

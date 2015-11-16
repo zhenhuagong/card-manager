@@ -29,6 +29,7 @@ let {
 let RowSection = require('./Shared/rowSection');
 let rowSectionStyle = {height: 50};
 
+let Login = require('./Login');
 let DrawerList = require('./drawerList');
 let Button = require('./Shared/button');
 let Configs = require('../configs');
@@ -37,64 +38,61 @@ let Request = require('../Networks/request');
 
 let Dashboard = React.createClass({
   getInitialState() {
-    return { loaded: false };
+    return {
+      loaded: false,
+      loggedin: false
+    };
+  },
+
+  // check login state
+  componentWillMount() {
+    this._checkLoginState().done();
   },
 
   componentDidMount() {
-    Request.get(
-      Configs.endpoints.overview,
-      {MSISDN:'1064805103117'},
-      {
-        onSuccess: (data) => {
-          console.log('got data' + JSON.stringify(data));
-          let cardInfo = data.pd;
-          let status = cardInfo.onoff === 1 ? '开机' : '关机';
-          this.setState({
-            id: cardInfo.MSISDN,
-            balance: cardInfo.balance,
-            sms: cardInfo.sms,
-            gprs: cardInfo.gprs,
-            status: status,
-            network: cardInfo.apn + ' / ' + cardInfo.rat,
-            loaded: true
-          });
-        },
-        onFail: (error) => {
-          this.setState({
-            error: error,
-            loaded: false
-          });
-        }
-      }
-    );
+    // if (this.state.loggedin) {
+    //   Request.get(
+    //     Configs.endpoints.overview,
+    //     {MSISDN: this.state.user.MSISDN},
+    //     {
+    //       onSuccess: (data) => {
+    //         console.log('got data' + JSON.stringify(data));
+    //         let cardInfo = data.pd;
+    //         let status = cardInfo.onoff === 1 ? '开机' : '关机';
+    //         this.setState({
+    //           id: cardInfo.MSISDN,
+    //           balance: cardInfo.balance,
+    //           sms: cardInfo.sms,
+    //           gprs: cardInfo.gprs,
+    //           status: status,
+    //           network: cardInfo.apn + ' / ' + cardInfo.rat,
+    //           loaded: true
+    //         });
+    //       },
+    //       onFail: (error) => {
+    //         this.setState({
+    //           error: error,
+    //           loaded: false
+    //         });
+    //       }
+    //     }
+    //   );
+    // }
   },
 
   render() {
-    let content = (
-      <Text style={styles.welcome}>
-        正在加载信息...
-      </Text>
-    );
-    if (this.state.loaded) {
-      content = (
+    console.log('loggedin? ' + this.state.loggedin);
+    if (!this.state.loggedin) {
+      return (
+        <View style={styles.loginContainer}>
+          <Login navigator={this.props.navigator}/>
+        </View>
+      );
+    } else {
+      let content = (
         <View style={styles.content}>
           <Text style={styles.welcome}>
-            欢迎登陆，{this.state.id}
-          </Text>
-          <Text style={styles.instructions}>
-            余额：{this.state.balance}
-          </Text>
-          <Text style={styles.instructions}>
-            当月短信使用量：{this.state.sms}
-          </Text>
-          <Text style={styles.instructions}>
-            当月gprs使用量：{this.state.gprs}
-          </Text>
-          <Text style={styles.instructions}>
-            当前卡状态：{this.state.status}
-          </Text>
-          <Text style={styles.instructions}>
-            网络：{this.state.network}
+            欢迎登陆，{this.state.user.USERNAME}
           </Text>
           <View style={styles.button}>
             <Button onPress={this._login}>
@@ -103,44 +101,58 @@ let Dashboard = React.createClass({
           </View>
         </View>
       );
-    } else {
-      if (this.state.error) {
-        content = (
-          <Text style={styles.welcome}>
-            {this.state.error}
-          </Text>
-        );
-      }
+
+      return (
+        <DrawerLayoutAndroid
+          ref={(drawer) => { this.drawer = drawer; }}
+          drawerWidth={Dimensions.get('window').width - DRAWER_WIDTH_LEFT}
+          keyboardDismissMode="on-drag"
+          drawerPosition={DrawerLayoutAndroid.positions.Left}
+          renderNavigationView={this._renderNavigationView}>
+          <View style={styles.container}>
+            <ToolbarAndroid
+              title={Configs.literals.title}
+              titleColor="white"
+              navIcon={require('../images/ic_drawer.png')}
+              logo={require('../images/ic_launcher.png')}
+              style={styles.toolbar}
+              onIconClicked={() => this.drawer.openDrawer()}
+              onActionSelected={this.onActionSelected} />
+            {content}
+          </View>
+        </DrawerLayoutAndroid>
+      );
     }
-
-    return (
-      <DrawerLayoutAndroid
-        ref={(drawer) => { this.drawer = drawer; }}
-        drawerWidth={Dimensions.get('window').width - DRAWER_WIDTH_LEFT}
-        keyboardDismissMode="on-drag"
-        drawerPosition={DrawerLayoutAndroid.positions.Left}
-        renderNavigationView={this._renderNavigationView}>
-        <View style={styles.container}>
-          <ToolbarAndroid
-            title={Configs.literals.title}
-            titleColor="white"
-            navIcon={require('../images/ic_drawer.png')}
-            logo={require('../images/ic_launcher.png')}
-            style={styles.toolbar}
-            onIconClicked={() => this.drawer.openDrawer()}
-            onActionSelected={this.onActionSelected} />
-          {content}
-        </View>
-      </DrawerLayoutAndroid>
-    );
-
   },
 
-  _renderNavigationView(){
+  _renderNavigationView() {
     return(
       <DrawerList navigator={this.props.navigator} name={this.props.name}/>
     );
   },
+
+  async _checkLoginState() {
+    try {
+      var value = await AsyncStorage.getItem(Configs.storageKeys.logged);
+      if (value !== null){
+        this.setState({
+          user: JSON.parse(value),
+          loggedin: true
+        });
+      } else {
+        this.setState({
+          loggedin: false,
+          error: ''
+        });
+      }
+    } catch (error) {
+      this.setState({
+        loggedin: false,
+        error: error
+      });
+      console.log(error);
+    }
+  }
 });
 
 let styles = StyleSheet.create({
