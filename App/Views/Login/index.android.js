@@ -39,15 +39,17 @@ let Login = React.createClass({
         <Text style={styles.title}>欢迎登陆</Text>
         <RowSection style={rowSectionStyle}>
           <Text style={styles.inputLabel}>用户名：</Text>
-          <Input style={styles.inputStyle} onBlur={this._setUsername}/>
+          <Input style={styles.inputStyle}
+            onBlur={(name) => this._setUsername(name)}/>
         </RowSection>
         <RowSection style={rowSectionStyle}>
           <Text style={styles.inputLabel}>密码：</Text>
-          <Input style={styles.inputStyle} onBlur={this._setPassword}/>
+          <Input style={styles.inputStyle}
+            onBlur={(pwd) => this._setPassword(pwd)}/>
         </RowSection>
         <RowSection style={rowSectionStyle} style={{marginTop: 30}}>
           <Button onPress={this._login}>
-            <Text>登陆</Text>
+            登陆
           </Button>
           <View style={styles.forgetPwd}>
             <Text>忘记密码?</Text>
@@ -62,12 +64,12 @@ let Login = React.createClass({
       )
   },
 
-  _setUsername(name) {
-    this.setState({ username: name});
+  _setUsername(username) {
+    this.setState({ username });
   },
 
   _setPassword(pwd) {
-    this.setState({ pwd: pwd });
+    this.setState({ pwd});
   },
 
   _login() {

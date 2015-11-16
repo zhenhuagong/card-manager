@@ -43,16 +43,17 @@ let CardManager = React.createClass({
   getInitialState() {
     // check login state
     return {
-      loginExpired: false
+      loginExpired: true
     };
   },
 
   render() {
     console.log('enterance of app for android platform');
     if (this.state.loginExpired) {
-      <View style={styles.loginContainer}>
-        <Login />
-      </View>
+      return (<View style={styles.loginContainer}>
+          <Login />
+        </View>
+      );
     } else {
       return (
         <Navigator

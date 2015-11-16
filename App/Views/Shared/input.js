@@ -30,15 +30,15 @@ let Input = React.createClass({
       autoCapitalize="none"
       placeholder={this.props.defaultValue}
       autoCorrect={false}
-      onChange={this._handleChange}
+      onChange={(event) => this._handleChange(event.nativeEvent.text)}
       onBlur={this._handleBlur} />;
   },
 
-  _handleChange(e) {
-    this.setState({ value: e.nativeEvent.text });
+  _handleChange(value) {
+    this.setState({ value });
   },
 
-  _handleBlur(e) {
+  _handleBlur() {
     this.props.onBlur(this.state.value);
   },
 
