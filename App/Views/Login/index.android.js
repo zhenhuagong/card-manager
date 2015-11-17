@@ -13,7 +13,7 @@
 'use strict';
 
 let React = require('react-native');
-let { StyleSheet, Text, View, AsyncStorage } = React;
+let { StyleSheet, Text, View, AsyncStorage, Image } = React;
 
 let BackDrop = require('../Shared/backdrop');
 let Input = require('../Shared/input');
@@ -37,7 +37,11 @@ let Login = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>欢迎登陆</Text>
+        <View style={{marginBottom: 50}}>
+          <Image
+            source={require('../../images/ic_logo.png')}
+            style={{width: 92, height: 92}} />
+        </View>
         <RowSection style={rowSectionStyle}>
           <Text style={styles.inputLabel}>用户名：</Text>
           <Input style={styles.inputStyle}
