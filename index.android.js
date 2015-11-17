@@ -57,10 +57,7 @@ let CardManager = React.createClass({
       // index: 0
       case Configs.routes.DASHBOARD:
         return (
-          <View style={styles.container}>
-            <Dashboard navigator={navigator} name={route.name}/>
-            <BottomMenuBar current={Configs.routes.DASHBOARD} navigator={navigator} name={route.name}/>
-          </View>
+          <Dashboard navigator={navigator} name={route.name}/>
         );
       // index: 1
       case Configs.routes.SMS:

@@ -35,6 +35,7 @@ let Button = require('./Shared/button');
 let Configs = require('../configs');
 let DRAWER_WIDTH_LEFT = 96;
 let Request = require('../Networks/request');
+let BottomMenuBar = require('./Shared/bottomMenuBar');
 
 let Dashboard = React.createClass({
   getInitialState() {
@@ -49,46 +50,15 @@ let Dashboard = React.createClass({
     this._checkLoginState().done();
   },
 
-  componentDidMount() {
-    // if (this.state.loggedin) {
-    //   Request.get(
-    //     Configs.endpoints.overview,
-    //     {MSISDN: this.state.user.MSISDN},
-    //     {
-    //       onSuccess: (data) => {
-    //         console.log('got data' + JSON.stringify(data));
-    //         let cardInfo = data.pd;
-    //         let status = cardInfo.onoff === 1 ? '开机' : '关机';
-    //         this.setState({
-    //           id: cardInfo.MSISDN,
-    //           balance: cardInfo.balance,
-    //           sms: cardInfo.sms,
-    //           gprs: cardInfo.gprs,
-    //           status: status,
-    //           network: cardInfo.apn + ' / ' + cardInfo.rat,
-    //           loaded: true
-    //         });
-    //       },
-    //       onFail: (error) => {
-    //         this.setState({
-    //           error: error,
-    //           loaded: false
-    //         });
-    //       }
-    //     }
-    //   );
-    // }
-  },
-
   render() {
     console.log('loggedin? ' + this.state.loggedin);
-    if (!this.state.loggedin) {
+    if (!this.state.loggedin) { // not logged in yet, show login form
       return (
-        <View style={styles.loginContainer}>
+        <View style={styles.container}>
           <Login navigator={this.props.navigator}/>
         </View>
       );
-    } else {
+    } else {  // already logged in, show dashboard
       let content = (
         <View style={styles.content}>
           <Text style={styles.welcome}>
@@ -120,6 +90,8 @@ let Dashboard = React.createClass({
               onActionSelected={this.onActionSelected} />
             {content}
           </View>
+          <BottomMenuBar current={Configs.routes.DASHBOARD}
+            navigator={this.props.navigator} name={route.name}/>
         </DrawerLayoutAndroid>
       );
     }
