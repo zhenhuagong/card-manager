@@ -43,7 +43,7 @@ let Configs = {
   },
 
   literals: {
-    title: 'CardManager'
+    title: '物物通'
   },
 
   errorMsg: {
