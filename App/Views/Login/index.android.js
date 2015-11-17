@@ -41,14 +41,20 @@ let Login = React.createClass({
         <RowSection style={rowSectionStyle}>
           <Text style={styles.inputLabel}>用户名：</Text>
           <Input style={styles.inputStyle}
-            onBlur={(name) => this._setUsername(name)}/>
+            onChange={(name) => this._setUsername(name)}/>
         </RowSection>
         <RowSection style={rowSectionStyle}>
           <Text style={styles.inputLabel}>密码：</Text>
           <Input style={styles.inputStyle}
-            onBlur={(pwd) => this._setPassword(pwd)}/>
+            onChange={(pwd) => this._setPassword(pwd)}/>
         </RowSection>
-        <RowSection style={rowSectionStyle} style={{marginTop: 30}}>
+        <RowSection style={rowSectionStyle}>
+          <Text style={styles.inputLabel}></Text>
+          <Text style={[styles.inputStyle, styles.errorStyle]}>
+            {this.state.error}
+          </Text>
+        </RowSection>
+        <RowSection style={rowSectionStyle}>
           <Button onPress={this._login}>
             登陆
           </Button>
@@ -70,11 +76,12 @@ let Login = React.createClass({
   },
 
   _setPassword(pwd) {
-    this.setState({ pwd});
+    this.setState({ pwd });
   },
 
   _login() {
     if (this._validateInput()) {
+      this.setState({ error: '' });
       let fkey = MD5(this.state.username + Moment().format('YYYYMMDD') + ',fh,');
       Request.get(
         Configs.endpoints.login,
@@ -93,14 +100,12 @@ let Login = React.createClass({
           },
           onFail: (error) => {
             console.log('got error when login ' + error);
-            this.props.navigator.push({
-              name: Configs.routes.DASHBOARD
-            });
+            this.setState({ error });
           }
         }
       );
     } else {
-      // popup an error message
+      this.setState({error: '用户名和密码不能为空'})
     }
   },
 
@@ -154,6 +159,9 @@ let styles = StyleSheet.create({
   },
   registerText: {
     color: 'orange'
+  },
+  errorStyle: {
+    color: 'red'
   }
 });
 

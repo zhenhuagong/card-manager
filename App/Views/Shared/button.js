@@ -26,26 +26,16 @@ let Button = React.createClass({
     };
   },
 
-  _onHighlight() {
-    this.setState({ active: true });
-  },
-
-  _onUnhighlight() {
-    this.setState({ active: false });
-  },
-
   render() {
     let colorStyle = {
       color: this.state.active ? '#grey' : '#000',
     };
     return (
       <TouchableHighlight
-        onHideUnderlay={this._onUnhighlight}
         onPress={this.props.onPress}
-        onShowUnderlay={this._onHighlight}
         style={[styles.button, this.props.style]}
         underlayColor="grey">
-          <Text style={[styles.buttonText, colorStyle, this.props.style]}>{this.props.children}</Text>
+          <Text style={[styles.buttonText, colorStyle]}>{this.props.children}</Text>
       </TouchableHighlight>
     );
   }
@@ -59,6 +49,7 @@ let styles = StyleSheet.create({
     margin: 10,
     height: 44,
     width: 160,
+    backgroundColor: '#d3d3d3',
     alignItems: 'center',
     justifyContent: 'center'
   },

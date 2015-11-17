@@ -35,11 +35,12 @@ let Input = React.createClass({
   },
 
   _handleChange(value) {
+    this.props.onChange && this.props.onChange(value);
     this.setState({ value });
   },
 
   _handleBlur() {
-    this.props.onBlur(this.state.value);
+    this.props.onBlur && this.props.onBlur(this.state.value);
   },
 
   _setFocus() {
