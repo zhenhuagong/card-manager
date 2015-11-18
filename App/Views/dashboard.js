@@ -37,7 +37,13 @@ let DRAWER_WIDTH_LEFT = 96;
 let Request = require('../Networks/request');
 let BottomMenuBar = require('./Shared/bottomMenuBar');
 
+let Reflux = require('reflux');
+let Store = require('../stores/dashboard');
+
 let Dashboard = React.createClass({
+
+  mixins: Reflux.connect([Store]),
+
   getInitialState() {
     return {
       loaded: false,
@@ -48,6 +54,10 @@ let Dashboard = React.createClass({
   // check login state
   componentWillMount() {
     this._checkLoginState().done();
+  },
+
+  componentWillUpdate(nextState, nextProps) {
+    console.log('dashboard update');
   },
 
   render() {
@@ -91,7 +101,7 @@ let Dashboard = React.createClass({
             {content}
           </View>
           <BottomMenuBar current={Configs.routes.DASHBOARD}
-            navigator={this.props.navigator} name={route.name}/>
+            navigator={this.props.navigator}/>
         </DrawerLayoutAndroid>
       );
     }

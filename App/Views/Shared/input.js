@@ -16,9 +16,6 @@ let React = require('react-native');
 let { StyleSheet, TextInput } = React;
 
 let Input = React.createClass({
-  propTypes: {
-    onBlur: React.PropTypes.func.isRequired
-  },
 
   getInitialState() {
     return { value: '' };

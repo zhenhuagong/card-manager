@@ -26,6 +26,7 @@ let {
 } = React
 
 let Configs = require('../configs');
+let Actions = require('../actions');
 
 let DrawerList = React.createClass({
   getInitialState() {
@@ -43,35 +44,24 @@ let DrawerList = React.createClass({
     // if (Platform.OS === 'android') {
     //   TouchableElement = TouchableNativeFeedback;
     // }
-    let logout;
-    console.log('check loggedin in drawer ' + this.state.loggedin);
-    if (this.state.loggedin) {
-      logout = (
-        <TouchableElement onPress={this._logout}>
-          <View style={{flexDirection: 'row', alignItems: 'center', padding: 16}}>
-            <Image
-              source={require('../images/ic_explore_white_24dp.png')}
-              style={{width: 24, height: 24, marginLeft: 16, marginRight: 16}} />
-            <Text style={styles.menuText}>
-              退出
-            </Text>
-          </View>
-        </TouchableElement>
-      );
-    }
+    let loginoutLabel = this.state.loggedin ? '注销' : '登陆';
+    let loginoutHandler = this.state.loggedin ? this._logout : this._login;
+    let loginout = (
+      <TouchableElement onPress={loginoutHandler}>
+        <View style={{flexDirection: 'row', alignItems: 'center', padding: 16}}>
+          <Image
+            source={require('../images/ic_explore_white_24dp.png')}
+            style={{width: 24, height: 24, marginLeft: 16, marginRight: 16}} />
+          <Text style={styles.menuText}>
+            {loginoutLabel}
+          </Text>
+        </View>
+      </TouchableElement>
+    );
+
     return (
       <View style={styles.container} {...this.props}>
         <View style={styles.header}/>
-        <TouchableElement onPress={this._gotoLogin}>
-          <View style={{flexDirection: 'row', alignItems: 'center', padding: 16}}>
-            <Image
-              source={require('../images/ic_explore_white_24dp.png')}
-              style={{width: 24, height: 24, marginLeft: 16, marginRight: 16}} />
-            <Text style={styles.menuText}>
-               登陆
-            </Text>
-          </View>
-        </TouchableElement>
         <TouchableElement onPress={this._gotoAbout}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 16}}>
             <Image
@@ -82,7 +72,7 @@ let DrawerList = React.createClass({
             </Text>
           </View>
         </TouchableElement>
-        {logout}
+        {loginout}
       </View>
     );
   },
@@ -103,6 +93,7 @@ let DrawerList = React.createClass({
 
   _logout() {
     this._removeStorage();
+    Actions.logout();
     this.setState({
       loggedin: false
     });
