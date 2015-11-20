@@ -76,7 +76,7 @@ let Dashboard = React.createClass({
           </Text>
           <View style={styles.button}>
             <Button onPress={this._login}>
-              <Text>卡详情查询</Text>
+              卡详情查询
             </Button>
           </View>
         </View>

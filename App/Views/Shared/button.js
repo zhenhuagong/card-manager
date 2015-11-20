@@ -28,7 +28,7 @@ let Button = React.createClass({
 
   render() {
     let colorStyle = {
-      color: this.state.active ? '#grey' : '#000',
+      color: this.state.active ? '#grey' : '#fff',
     };
     return (
       <TouchableHighlight
@@ -49,7 +49,7 @@ let styles = StyleSheet.create({
     margin: 10,
     height: 44,
     width: 160,
-    backgroundColor: '#d3d3d3',
+    backgroundColor: '#78909C',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -57,7 +57,7 @@ let styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   }
 });
 
