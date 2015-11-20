@@ -103,14 +103,6 @@ let CardManager = React.createClass({
           </View>
         );
       // index: 4
-      case Configs.routes.LOGIN:
-        return (
-          <View style={styles.container}>
-            <NavToolbar navIcon={true} navigator={navigator}/>
-            <Login navigator={navigator} name={route.name}/>
-          </View>
-        );
-      // index: 5
       case Configs.routes.ABOUT:
         return (
           <View style={styles.container}>

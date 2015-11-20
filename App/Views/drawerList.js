@@ -30,25 +30,14 @@ let Actions = require('../actions');
 let { Icon } = require('react-native-icons');
 
 let DrawerList = React.createClass({
-  getInitialState() {
-    return {
-      loggedin: false,
-    };
-  },
-
-  componentDidMount() {
-    this._checkLoginState();
-  },
 
   render(){
     let TouchableElement = TouchableHighlight;
     // if (Platform.OS === 'android') {
     //   TouchableElement = TouchableNativeFeedback;
     // }
-    let loginoutLabel = this.state.loggedin ? '注销' : '登陆';
-    let loginoutHandler = this.state.loggedin ? this._logout : this._login;
     let loginout = (
-      <TouchableElement onPress={loginoutHandler}>
+      <TouchableElement onPress={this._logout}>
         <View style={{flexDirection: 'row', alignItems: 'center', padding: 16}}>
             <Icon
               name='material|sign-in'
@@ -56,7 +45,7 @@ let DrawerList = React.createClass({
               color='#ffffff'
               style={styles.menuIcon} />
           <Text style={styles.menuText}>
-            {loginoutLabel}
+            注销
           </Text>
         </View>
       </TouchableElement>
@@ -82,13 +71,6 @@ let DrawerList = React.createClass({
     );
   },
 
-  _gotoLogin() {
-    console.log('go to login');
-    this.props.navigator.push({
-      name: Configs.routes.LOGIN
-    });
-  },
-
   _gotoAbout() {
     console.log('go to about');
     this.props.navigator.push({
@@ -99,28 +81,6 @@ let DrawerList = React.createClass({
   _logout() {
     this._removeStorage();
     Actions.logout();
-    this.setState({
-      loggedin: false
-    });
-  },
-
-  async _checkLoginState() {
-    try {
-      var value = await AsyncStorage.getItem(Configs.storageKeys.logged);
-      if (value !== null){
-        this.setState({
-          loggedin: true
-        });
-      } else {
-        this.setState({
-          loggedin: false
-        });
-      }
-    } catch (error) {
-      this.setState({
-        loggedin: false
-      });
-    }
   },
 
   async _removeStorage() {

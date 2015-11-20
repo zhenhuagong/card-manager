@@ -33,7 +33,6 @@ let Configs = {
     SMS_LIST: 'sms_list',
     QUOTA: 'quota_management',
     ESHOP: 'eshop',
-    LOGIN: 'login',
     ABOUT: 'about'
   },
 
