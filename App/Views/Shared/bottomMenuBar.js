@@ -25,6 +25,7 @@ let {
 } = React;
 
 let Configs = require('../../configs');
+let { Icon } = require('react-native-icons');
 
 let BottomMenuBar = React.createClass({
   render() {
@@ -54,9 +55,11 @@ let BottomMenuBar = React.createClass({
       <View style={styles.menubar}>
         <TouchableHighlight style={menuStyles.dashboard} ref={Configs.routes.DASHBOARD} onPress={this._goFav}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
-            <Image
-              source={require('../../images/ic_explore_white_24dp.png')}
-              style={{width: 24, height: 24, marginLeft: 6, marginRight: 6}} />
+            <Icon
+              name='material|view-dashboard'
+              size={22}
+              color='#ffffff'
+              style={styles.menuIcon} />
             <Text style={styles.menuText}>
               概览
             </Text>
@@ -64,9 +67,11 @@ let BottomMenuBar = React.createClass({
         </TouchableHighlight>
         <TouchableHighlight style={menuStyles.sms} ref={Configs.routes.SMS} onPress={this._goSMS}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
-            <Image
-              source={require('../../images/ic_explore_white_24dp.png')}
-              style={{width: 24, height: 24, marginLeft: 6, marginRight: 6}} />
+            <Icon
+              name='material|email'
+              size={22}
+              color='#ffffff'
+              style={styles.menuIcon} />
             <Text style={styles.menuText}>
               短信
             </Text>
@@ -74,9 +79,11 @@ let BottomMenuBar = React.createClass({
         </TouchableHighlight>
         <TouchableHighlight style={menuStyles.quota} ref={Configs.routes.QUOTA} onPress={this._goQuota}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
-            <Image
-              source={require('../../images/ic_explore_white_24dp.png')}
-              style={{width: 24, height: 24, marginLeft: 6, marginRight: 6}} />
+            <Icon
+              name='material|input-antenna'
+              size={22}
+              color='#ffffff'
+              style={styles.menuIcon} />
             <Text style={styles.menuText}>
               流量
             </Text>
@@ -84,9 +91,11 @@ let BottomMenuBar = React.createClass({
         </TouchableHighlight>
         <TouchableHighlight style={menuStyles.eshop} ref={Configs.routes.ESHOP} onPress={this._goEShop}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
-            <Image
-              source={require('../../images/ic_explore_white_24dp.png')}
-              style={{width: 24, height: 24, marginLeft: 6, marginRight: 6}} />
+            <Icon
+              name='material|shopping-cart'
+              size={22}
+              color='#ffffff'
+              style={styles.menuIcon} />
             <Text style={styles.menuText}>
               商城
             </Text>
@@ -147,6 +156,12 @@ let styles = StyleSheet.create({
   menuText: {
     fontSize: 14,
     color: 'white',
+  },
+  menuIcon: {
+    width: 24,
+    height: 24,
+    marginLeft: 6,
+    marginRight: 6
   },
   currentMenu: {
     backgroundColor: Configs.colors.greenLight
