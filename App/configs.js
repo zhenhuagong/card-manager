@@ -37,8 +37,13 @@ let Configs = {
   },
 
   colors: {
-    greenDark: '#16A085',
-    greenLight: '#1ABC9C'
+    greenDark: '#004D40',
+    greenLight: '#1ABC9C',
+    greenButton: '#00796B',
+    grayMenu: '#FAFAFA',
+    whiteContent: '#F5FCFF',
+    buttonUnderlay: '#009688',
+    menuBorder: '#E0F2F1'
   },
 
   literals: {

@@ -53,48 +53,52 @@ let BottomMenuBar = React.createClass({
     }
     return (
       <View style={styles.menubar}>
-        <TouchableHighlight style={menuStyles.dashboard} ref={Configs.routes.DASHBOARD} onPress={this._goFav}>
+        <TouchableHighlight style={menuStyles.dashboard}
+          ref={Configs.routes.DASHBOARD} onPress={this._goFav}
+          underlayColor={Configs.colors.grayMenu}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
             <Icon
               name='material|view-dashboard'
               size={22}
-              color='#ffffff'
               style={styles.menuIcon} />
             <Text style={styles.menuText}>
               概览
             </Text>
           </View>
         </TouchableHighlight>
-        <TouchableHighlight style={menuStyles.sms} ref={Configs.routes.SMS} onPress={this._goSMS}>
+        <TouchableHighlight style={menuStyles.sms}
+          ref={Configs.routes.SMS} onPress={this._goSMS}
+          underlayColor={Configs.colors.grayMenu}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
             <Icon
               name='material|email'
               size={22}
-              color='#ffffff'
               style={styles.menuIcon} />
             <Text style={styles.menuText}>
               短信
             </Text>
           </View>
         </TouchableHighlight>
-        <TouchableHighlight style={menuStyles.quota} ref={Configs.routes.QUOTA} onPress={this._goQuota}>
+        <TouchableHighlight style={menuStyles.quota}
+          ref={Configs.routes.QUOTA} onPress={this._goQuota}
+          underlayColor={Configs.colors.grayMenu}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
             <Icon
               name='material|input-antenna'
               size={22}
-              color='#ffffff'
               style={styles.menuIcon} />
             <Text style={styles.menuText}>
               流量
             </Text>
           </View>
         </TouchableHighlight>
-        <TouchableHighlight style={menuStyles.eshop} ref={Configs.routes.ESHOP} onPress={this._goEShop}>
+        <TouchableHighlight style={menuStyles.eshop}
+          ref={Configs.routes.ESHOP} onPress={this._goEShop}
+          underlayColor={Configs.colors.grayMenu}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
             <Icon
               name='material|shopping-cart'
               size={22}
-              color='#ffffff'
               style={styles.menuIcon} />
             <Text style={styles.menuText}>
               商城
@@ -144,7 +148,9 @@ let BottomMenuBar = React.createClass({
 
 let styles = StyleSheet.create({
   menubar: {
-    backgroundColor: Configs.colors.greenDark,
+    backgroundColor: Configs.colors.grayMenu,
+    borderTopColor: Configs.colors.menuBorder,
+    borderTopWidth: 1,
     height: 56,
     flexDirection: 'row'
   },
@@ -155,7 +161,7 @@ let styles = StyleSheet.create({
   },
   menuText: {
     fontSize: 14,
-    color: 'white',
+    color: 'black',
   },
   menuIcon: {
     width: 24,

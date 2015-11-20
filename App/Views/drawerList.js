@@ -37,7 +37,7 @@ let DrawerList = React.createClass({
     //   TouchableElement = TouchableNativeFeedback;
     // }
     let loginout = (
-      <TouchableElement onPress={this._logout}>
+      <TouchableElement onPress={this._logout} underlayColor={Configs.colors.greenDark}>
         <View style={{flexDirection: 'row', alignItems: 'center', padding: 16}}>
             <Icon
               name='material|sign-in'
@@ -54,7 +54,8 @@ let DrawerList = React.createClass({
     return (
       <View style={styles.container} {...this.props}>
         <View style={styles.header}/>
-        <TouchableElement onPress={this._gotoAbout}>
+        <TouchableElement onPress={this._gotoAbout}
+          underlayColor={Configs.colors.greenDark}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 16}}>
             <Icon
               name='material|info-outline'
@@ -102,7 +103,7 @@ let styles = StyleSheet.create({
   },
   header: {
     height: 56,
-    backgroundColor: Configs.colors.greenDark,
+    backgroundColor: Configs.colors.greenButton,
   },
   menuText: {
     fontSize: 14,

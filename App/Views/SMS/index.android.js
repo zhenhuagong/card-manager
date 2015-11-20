@@ -27,12 +27,12 @@ let SMS = React.createClass({
       <View style={styles.container}>
         <View style={styles.button}>
           <Button onPress={this._sendSMS}>
-            <Text>发送短信</Text>
+            <Text style={{color: '#ffffff'}}>发送短信</Text>
           </Button>
         </View>
         <View style={styles.button}>
           <Button onPress={this._listSMS}>
-            <Text>已发短信</Text>
+            <Text style={{color: '#ffffff'}}>已发短信</Text>
           </Button>
         </View>
       </View>

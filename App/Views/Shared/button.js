@@ -13,29 +13,21 @@
 'use strict';
 
 let React = require('react-native');
-let { StyleSheet, Text, TouchableHighlight } = React;
+let { StyleSheet, Text, TouchableHighlight, View } = React;
+let Configs = require('../../configs');
 
 let Button = React.createClass({
   propTypes: {
     onPress: React.PropTypes.func,
   },
 
-  getInitialState() {
-    return {
-      active: false,
-    };
-  },
-
   render() {
-    let colorStyle = {
-      color: this.state.active ? '#grey' : '#fff',
-    };
     return (
       <TouchableHighlight
         onPress={this.props.onPress}
         style={[styles.button, this.props.style]}
-        underlayColor="grey">
-          <Text style={[styles.buttonText, colorStyle]}>{this.props.children}</Text>
+        underlayColor={Configs.colors.buttonUnderlay}>
+          <View style={styles.content}>{this.props.children}</View>
       </TouchableHighlight>
     );
   }
@@ -43,21 +35,19 @@ let Button = React.createClass({
 
 let styles = StyleSheet.create({
   button: {
-    borderColor: '#696969',
-    borderRadius: 2,
+    borderColor: '#E0F2F1',
+    borderRadius: 5,
     borderWidth: 1,
     margin: 10,
     height: 44,
     width: 160,
-    backgroundColor: '#78909C',
+    fontSize: 18,
+    backgroundColor: '#00796B',
     alignItems: 'center',
     justifyContent: 'center'
   },
-  buttonText: {
-    fontSize: 18,
-    textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center'
+  content : {
+    flexDirection: 'row'
   }
 });
 

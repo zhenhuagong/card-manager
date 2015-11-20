@@ -60,7 +60,7 @@ let Login = React.createClass({
         </RowSection>
         <RowSection style={rowSectionStyle}>
           <Button onPress={this._login}>
-            登陆
+            <Text style={{color: '#ffffff'}}>登陆</Text>
           </Button>
           <View style={styles.forgetPwd}>
             <Text>忘记密码?</Text>

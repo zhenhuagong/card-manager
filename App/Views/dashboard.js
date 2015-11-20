@@ -39,6 +39,7 @@ let BottomMenuBar = require('./Shared/bottomMenuBar');
 
 let Reflux = require('reflux');
 let Store = require('../stores/dashboard');
+let { Icon } = require('react-native-icons');
 
 let Dashboard = React.createClass({
 
@@ -76,7 +77,7 @@ let Dashboard = React.createClass({
           </Text>
           <View style={styles.button}>
             <Button onPress={this._login}>
-              卡详情查询
+              <Text style={{color: '#ffffff'}}>卡详情查询</Text>
             </Button>
           </View>
         </View>
@@ -139,18 +140,17 @@ let Dashboard = React.createClass({
 let styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#FAFAFA',
+    flexDirection: 'column'
   },
   toolbar: {
-    backgroundColor: Configs.colors.greenDark,
+    backgroundColor: Configs.colors.greenLight,
     height: 56,
   },
   content: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: Configs.colors.whiteContent
   },
   welcome: {
     fontSize: 20,

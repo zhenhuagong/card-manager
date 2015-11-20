@@ -19,6 +19,7 @@ let Input = require('../Shared/input');
 let Button = require('../Shared/button');
 let Request = require('../../Networks/request');
 let Configs = require('../../configs');
+let { Icon } = require('react-native-icons');
 
 let FormBlock = React.createClass({
   render() {
@@ -57,7 +58,12 @@ let SendSMS = React.createClass({
         </FormBlock>
         <FormBlock style={{marginTop: 30}}>
           <Button onPress={this._send}>
-            <Text>发送</Text>
+            <Text style={{color: '#ffffff'}}>发送</Text>
+            <Icon
+              name='material|mail-send'
+              size={22}
+              color='#ffffff'
+              style={styles.sendIcon} />
           </Button>
         </FormBlock>
       </View>
@@ -127,6 +133,12 @@ let styles = StyleSheet.create({
   },
   registerText: {
     color: 'orange'
+  },
+  sendIcon: {
+    width: 24,
+    height: 24,
+    marginLeft: 6,
+    marginRight: 6
   }
 });
 
