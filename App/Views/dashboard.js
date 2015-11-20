@@ -94,7 +94,6 @@ let Dashboard = React.createClass({
               title={Configs.literals.title}
               titleColor="white"
               navIcon={require('../images/ic_drawer.png')}
-              logo={require('../images/ic_launcher.png')}
               style={styles.toolbar}
               onIconClicked={() => this.drawer.openDrawer()}
               onActionSelected={this.onActionSelected} />

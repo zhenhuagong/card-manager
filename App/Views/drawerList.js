@@ -27,6 +27,7 @@ let {
 
 let Configs = require('../configs');
 let Actions = require('../actions');
+let { Icon } = require('react-native-icons');
 
 let DrawerList = React.createClass({
   getInitialState() {
@@ -49,9 +50,11 @@ let DrawerList = React.createClass({
     let loginout = (
       <TouchableElement onPress={loginoutHandler}>
         <View style={{flexDirection: 'row', alignItems: 'center', padding: 16}}>
-          <Image
-            source={require('../images/ic_explore_white_24dp.png')}
-            style={{width: 24, height: 24, marginLeft: 16, marginRight: 16}} />
+            <Icon
+              name='material|sign-in'
+              size={22}
+              color='#ffffff'
+              style={styles.menuIcon} />
           <Text style={styles.menuText}>
             {loginoutLabel}
           </Text>
@@ -64,9 +67,11 @@ let DrawerList = React.createClass({
         <View style={styles.header}/>
         <TouchableElement onPress={this._gotoAbout}>
           <View style={{flexDirection: 'row', alignItems: 'center', padding: 16}}>
-            <Image
-              source={require('../images/ic_explore_white_24dp.png')}
-              style={{width: 24, height: 24, marginLeft: 16, marginRight: 16}} />
+            <Icon
+              name='material|info-outline'
+              size={22}
+              color='#ffffff'
+              style={styles.menuIcon} />
             <Text style={styles.menuText}>
               关于
             </Text>
@@ -142,6 +147,12 @@ let styles = StyleSheet.create({
   menuText: {
     fontSize: 14,
     color: 'white',
+  },
+  menuIcon: {
+    width: 24,
+    height: 24,
+    marginLeft: 6,
+    marginRight: 6
   }
 });
 
