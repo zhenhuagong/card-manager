@@ -13,9 +13,8 @@
 'use strict';
 
 let React = require('react-native');
-let { StyleSheet, Text, View } = React;
+let { StyleSheet, Text, View, TextInput} = React;
 
-let Input = require('../Shared/input');
 let Button = require('../Shared/button');
 let Request = require('../../Networks/request');
 let Configs = require('../../configs');
@@ -39,21 +38,57 @@ let FormBlock = React.createClass({
 let SendSMS = React.createClass({
   getInitialState() {
     return {
-      phoneNumbers: '',
-      content: ''
+      number: '',
+      text: ''
     };
   },
 
   render() {
+    //define delimiter
+    let delimiter = /\s+/;
+
+    //split string
+    let _text = this.state.text;
+    let token, index, contents = [];
+    while (_text) {
+      delimiter.lastIndex = 0;
+      token = delimiter.exec(_text);
+      if (token === null) {
+        break;
+      }
+      index = token.index;
+      if (token[0].length === 0) {
+        index = 1;
+      }
+      contents.push(_text.substr(0, index));
+      contents.push(token[0]);
+      index = index + token[0].length;
+      _text = _text.slice(index);
+    }
+    contents.push(_text);
+
     return (
       <View style={styles.container}>
         <FormBlock>
           <Text style={styles.inputLabel}>发送号码：</Text>
-          <Input style={styles.inputStyle} onBlur={this._setPhoneNumbers}/>
+          <TextInput style={styles.input}
+            keyboardType='numeric'
+            autoCapitalize='none'
+            placeholder='请输入手机号'
+            value={this.state.number}
+            onChangeText={(number) => {
+              this.setState({number});
+            }}/>
         </FormBlock>
         <FormBlock>
           <Text style={styles.inputLabel}>发送内容：</Text>
-          <Input style={styles.inputStyle} onBlur={this._setContent}/>
+          <TextInput style={[styles.input, styles.inputArea]} multiline={true}
+            placeholder='请输入短信内容'
+            onChangeText={(text) => {
+              this.setState({text});
+            }}>
+            <Text>{contents}</Text>
+          </TextInput>
           <Text style={styles.registerText}>（通配符: 姓名:%name% , 尊称:%title%）</Text>
         </FormBlock>
         <FormBlock style={{marginTop: 30}}>
@@ -70,20 +105,12 @@ let SendSMS = React.createClass({
       )
   },
 
-  _setPhoneNumbers(phoneNumbers) {
-    this.setState({ phoneNumbers});
-  },
-
-  _setContent(content) {
-    this.setState({ content });
-  },
-
   _send() {
     if (this._validateInput()) {
       // Send a post request to login api
       Request.post(Configs.api.sendSMS, {
-        phoneNumbers: this.state.phoneNumbers,
-        content: this.state.content
+        phoneNumbers: this.state.number,
+        content: this.state.text
       }, {
         onSuccess: (data) => {
         },
@@ -100,7 +127,7 @@ let SendSMS = React.createClass({
   },
 
   _validateInput() {
-    if (!this.state.phoneNumbers || !this.state.content) {
+    if (!this.state.number || !this.state.content) {
       return false;
     } else {
       return true;
@@ -116,10 +143,19 @@ let styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
     height: 180
   },
-  inputStyle: {
+  input: {
     width: 180,
     height: 40,
-    fontSize: 18
+    fontSize: 16,
+    padding: 4,
+  },
+  inputArea: {
+    height: 80,
+    marginBottom: 10,
+  },
+  highlight: {
+    color: 'blue',
+    fontWeight: 'bold'
   },
   title: {
     fontSize: 25,
