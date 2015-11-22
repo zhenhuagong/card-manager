@@ -27,9 +27,6 @@ let Request = {
       .then((responseData) => {
         cb.onSuccess && cb.onSuccess(responseData);
       })
-      .catch((error) => {
-        cb.onFail && cb.onFail(error.message);
-      })
       .done();
   },
 
@@ -47,9 +44,6 @@ let Request = {
       .then((response) => response.json())
       .then((responseData) => {
         cb.onSuccess && cb.onSuccess(responseData);
-      })
-      .catch((error) => {
-        cb.onFail && cb.onFail(error.message);
       })
       .done();
   }

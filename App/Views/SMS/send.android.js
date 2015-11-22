@@ -108,19 +108,21 @@ let SendSMS = React.createClass({
   _send() {
     if (this._validateInput()) {
       // Send a post request to login api
-      Request.post(Configs.api.sendSMS, {
-        phoneNumbers: this.state.number,
-        content: this.state.text
-      }, {
-        onSuccess: (data) => {
-        },
-        onFail: (error) => {
+      Request.get(
+        Configs.endpoints.sendSMS,
+        {
+          MSISDN: this.state.number,
+          CONTENT: this.state.text,
+          USERID:  ''
+        {
+          onSuccess: (data) => {
+            console.log('message sent' + JSON.stringify(data));
+          }
         }
-      }).then((result) => {
-
-      }).catch((err) => {
-
-      })
+      )
+      .catch((err) => {
+        console.log('got error when sending message ' + error);
+      });
     } else {
       // popup an error message
     }

@@ -101,7 +101,8 @@ let Dashboard = React.createClass({
             {content}
           </View>
           <BottomMenuBar current={Configs.routes.DASHBOARD}
-            navigator={this.props.navigator}/>
+            navigator={this.props.navigator}
+            user={this.state.user}/>
         </DrawerLayoutAndroid>
       );
     }

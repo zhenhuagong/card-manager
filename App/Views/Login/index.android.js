@@ -101,13 +101,13 @@ let Login = React.createClass({
             this.props.navigator.push({
               name: Configs.routes.DASHBOARD
             });
-          },
-          onFail: (error) => {
-            console.log('got error when login ' + error);
-            this.setState({ error });
           }
         }
-      );
+      )
+      .catch((err) => {
+        console.log('got error when login ' + error);
+        this.setState({ error });
+      });
     } else {
       this.setState({error: '用户名和密码不能为空'})
     }
