@@ -34,7 +34,6 @@ let DrawerList = require('./drawerList');
 let Button = require('./Shared/button');
 let Configs = require('../configs');
 let DRAWER_WIDTH_LEFT = 96;
-let Request = require('../Networks/request');
 let BottomMenuBar = require('./Shared/bottomMenuBar');
 
 let Reflux = require('reflux');

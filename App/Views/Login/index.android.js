@@ -88,29 +88,51 @@ let Login = React.createClass({
     if (this._validateInput()) {
       this.setState({ error: '' });
       let fkey = MD5(this.state.username + Moment().format('YYYYMMDD') + ',fh,');
+      console.log('login with combo: ' + JSON.stringify(this.state));
       Request.get(
         Configs.endpoints.login,
         {
           USERNAME: this.state.username,
           PASSWORD: this.state.pwd,
           FKEY: fkey.toString()   // must call `toString` here
-        },
-        {
-          onSuccess: (data) => {
-            console.log('got login data' + JSON.stringify(data));
+        }
+      )
+      .then((data) => {
+        console.log(data);
+        console.log('got login data' + JSON.stringify(data));
+        switch(data.result) {
+          case '00':
             this._setUserLogin(JSON.stringify(data.pd));
             this.props.navigator.push({
               name: Configs.routes.DASHBOARD
             });
-          }
+            break;
+          case '01':
+            this.setState({ error: '用户名或者密码错' });
+            break;
+          case '02':
+            this.setState({ error: '用户名密码校验成功，读取用户信息失败' });
+            break;
+          case '03':
+            this.setState({ error: '该用户未注册' });
+            break;
+          case '04':
+            this.setState({ error: '用户名和密码不能为空' });
+            break;
+          case '05':
+            this.setState({ error: '登陆请求校验码不匹配' });
+            break;
+          default:
+            this.setState({ error: '服务器异常，暂时无法登陆，请稍后再试' });
+            break;
         }
-      )
+      })
       .catch((err) => {
         console.log('got error when login ' + error);
         this.setState({ error });
       });
     } else {
-      this.setState({error: '用户名和密码不能为空'})
+      this.setState({error: '用户名和密码不能为空'});
     }
   },
 

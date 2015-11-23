@@ -12,7 +12,7 @@ let timeout = (ms, promise) => {
 };
 
 let Request = {
-  post(endpoint, data, cb) {
+  post(endpoint, data) {
     return timeout(
       Config.timeout,
       fetch(endpoint, {
@@ -25,12 +25,11 @@ let Request = {
       }))
       .then((response) => response.json())
       .then((responseData) => {
-        cb.onSuccess && cb.onSuccess(responseData);
-      })
-      .done();
+        return Promise.resolve(responseData);
+      });
   },
 
-  get(endpoint, queries, cb) {
+  get(endpoint, queries) {
     let url = endpoint + '?' + QS.stringify(queries);
     return timeout(
       Config.timeout,
@@ -43,9 +42,8 @@ let Request = {
       }))
       .then((response) => response.json())
       .then((responseData) => {
-        cb.onSuccess && cb.onSuccess(responseData);
-      })
-      .done();
+        return Promise.resolve(responseData);
+      });
   }
 };
 
