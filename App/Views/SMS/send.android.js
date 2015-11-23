@@ -13,7 +13,7 @@
 'use strict';
 
 let React = require('react-native');
-let { StyleSheet, Text, View, TextInput} = React;
+let { StyleSheet, Text, View, TextInput, ToastAndroid } = React;
 
 let Button = require('../Shared/button');
 let Request = require('../../Networks/request');
@@ -71,18 +71,15 @@ let SendSMS = React.createClass({
     return (
       <View style={styles.container}>
         <FormBlock>
-          <Text style={styles.inputLabel}>发送号码：</Text>
           <TextInput style={styles.input}
             keyboardType='numeric'
-            autoCapitalize='none'
-            placeholder='请输入手机号'
+            placeholder='请输入卡号'
             value={this.state.number}
             onChangeText={(number) => {
               this.setState({number});
             }}/>
         </FormBlock>
         <FormBlock>
-          <Text style={styles.inputLabel}>发送内容：</Text>
           <TextInput style={[styles.input, styles.inputArea]} multiline={true}
             autoCapitalize='none' autoCorrect={false}
             placeholder='请输入短信内容' textAlign='start' textAlignVertical='top'
@@ -92,6 +89,9 @@ let SendSMS = React.createClass({
             <Text>{contents}</Text>
           </TextInput>
           <Text style={styles.registerText}>（通配符: 姓名:%name% , 尊称:%title%）</Text>
+        </FormBlock>
+        <FormBlock>
+          <Text style={styles.error}>{this.state.error}</Text>
         </FormBlock>
         <FormBlock style={{marginTop: 30}}>
           <Button onPress={this._send}>
@@ -109,8 +109,7 @@ let SendSMS = React.createClass({
 
   _send() {
     if (this._validateInput()) {
-      // Send a post request to login api
-      console.log('send sms with: ' + JSON.stringify(this.state) + ',' + FlashData.get('userid')) ;
+      this.setState({ error: '' });
       Request.get(
         Configs.endpoints.sendSMS,
         {
@@ -121,17 +120,29 @@ let SendSMS = React.createClass({
       )
       .then((response) => {
         console.log('message sent' + JSON.stringify(response));
+        switch(response.result) {
+          case '00':
+            ToastAndroid.show('发送成功！', ToastAndroid.SHORT);
+            this.props.navigator.pop();
+            break;
+          case '01':
+            this.setState({ error: '发送短信失败！请稍后再试。' });
+            break;
+          default:
+            this.setState({ error: '服务器异常，暂时无法发送短信，请稍后再试' });
+            break;
+        }
       })
       .catch((err) => {
         console.log('got error when sending message ' + error);
       });
     } else {
-      // popup an error message
+      this.setState({ error: '提示：卡号和短信内容不能为空！' });
     }
   },
 
   _validateInput() {
-    if (!this.state.number || !this.state.content) {
+    if (!this.state.number || !this.state.text) {
       return false;
     } else {
       return true;
@@ -154,7 +165,7 @@ let styles = StyleSheet.create({
     padding: 4,
   },
   inputArea: {
-    height: 80,
+    height: 60,
     marginBottom: 10,
   },
   highlight: {
@@ -179,6 +190,9 @@ let styles = StyleSheet.create({
     height: 24,
     marginLeft: 6,
     marginRight: 6
+  },
+  error: {
+    color: 'red'
   }
 });
 

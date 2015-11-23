@@ -21,7 +21,7 @@ let Configs = {
     overview: apiServer + '/appbusi/queryinfo',   //查询汇总信息
     history: apiServer + '/appbusi/qryusedbydate',  //查询短信和GPRS历史使用量
     cardinfo: apiServer + '/appbusi/qrycardinfo',   //查询号码信息
-    sendSMS: '/appbusi/sendmsg',  //发送短信
+    sendSMS: apiServer + '/appbusi/sendmsg',  //发送短信
     listSMS: '',
     queryQuota: ''
   },
