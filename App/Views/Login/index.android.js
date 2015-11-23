@@ -24,6 +24,7 @@ let Moment = require('moment');
 
 let RowSection = require('../Shared/rowSection');
 let rowSectionStyle = {height: 50, alignItems: 'center'};
+let FlashData = require('../../Networks/flashData');
 
 let Login = React.createClass({
   getInitialState() {
@@ -106,6 +107,7 @@ let Login = React.createClass({
             this.props.navigator.push({
               name: Configs.routes.DASHBOARD
             });
+            FlashData.set('userid', data.pd.USER_ID);
             break;
           case '01':
             this.setState({ error: '用户名或者密码错' });

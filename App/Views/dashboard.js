@@ -39,6 +39,7 @@ let BottomMenuBar = require('./Shared/bottomMenuBar');
 let Reflux = require('reflux');
 let Store = require('../stores/dashboard');
 let { Icon } = require('react-native-icons');
+let FlashData = require('../Networks/flashData');
 
 let Dashboard = React.createClass({
 
@@ -100,8 +101,7 @@ let Dashboard = React.createClass({
             {content}
           </View>
           <BottomMenuBar current={Configs.routes.DASHBOARD}
-            navigator={this.props.navigator}
-            user={this.state.user}/>
+            navigator={this.props.navigator}/>
         </DrawerLayoutAndroid>
       );
     }
@@ -115,12 +115,14 @@ let Dashboard = React.createClass({
 
   async _checkLoginState() {
     try {
-      var value = await AsyncStorage.getItem(Configs.storageKeys.logged);
+      let value = await AsyncStorage.getItem(Configs.storageKeys.logged);
       if (value !== null){
+        let user = JSON.parse(value);
         this.setState({
-          user: JSON.parse(value),
+          user: user,
           loggedin: true
         });
+        FlashData.set('userid', user.USER_ID);
       } else {
         this.setState({
           loggedin: false,

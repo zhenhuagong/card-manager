@@ -19,6 +19,7 @@ let Button = require('../Shared/button');
 let Request = require('../../Networks/request');
 let Configs = require('../../configs');
 let { Icon } = require('react-native-icons');
+let FlashData = require('../../Networks/flashData');
 
 let FormBlock = React.createClass({
   render() {
@@ -83,7 +84,8 @@ let SendSMS = React.createClass({
         <FormBlock>
           <Text style={styles.inputLabel}>发送内容：</Text>
           <TextInput style={[styles.input, styles.inputArea]} multiline={true}
-            placeholder='请输入短信内容'
+            autoCapitalize='none' autoCorrect={false}
+            placeholder='请输入短信内容' textAlign='start' textAlignVertical='top'
             onChangeText={(text) => {
               this.setState({text});
             }}>
@@ -108,18 +110,18 @@ let SendSMS = React.createClass({
   _send() {
     if (this._validateInput()) {
       // Send a post request to login api
+      console.log('send sms with: ' + JSON.stringify(this.state) + ',' + FlashData.get('userid')) ;
       Request.get(
         Configs.endpoints.sendSMS,
         {
           MSISDN: this.state.number,
           CONTENT: this.state.text,
-          USERID:  ''
-        {
-          onSuccess: (data) => {
-            console.log('message sent' + JSON.stringify(data));
-          }
+          USERID:  FlashData.get('userid')
         }
       )
+      .then((response) => {
+        console.log('message sent' + JSON.stringify(response));
+      })
       .catch((err) => {
         console.log('got error when sending message ' + error);
       });
