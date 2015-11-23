@@ -41,7 +41,6 @@ let styles = StyleSheet.create({
     margin: 10,
     height: 44,
     width: 160,
-    fontSize: 18,
     backgroundColor: '#00796B',
     alignItems: 'center',
     justifyContent: 'center'
