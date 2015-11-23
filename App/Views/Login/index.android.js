@@ -13,10 +13,9 @@
 'use strict';
 
 let React = require('react-native');
-let { StyleSheet, Text, View, AsyncStorage, Image } = React;
+let { StyleSheet, Text, View, AsyncStorage, Image, TextInput } = React;
 
 let BackDrop = require('../Shared/backdrop');
-let Input = require('../Shared/input');
 let Button = require('../Shared/button');
 let Request = require('../../Networks/request');
 let Configs = require('../../configs');
@@ -44,13 +43,15 @@ let Login = React.createClass({
         </View>
         <RowSection style={rowSectionStyle}>
           <Text style={styles.inputLabel}>用户名：</Text>
-          <Input style={styles.inputStyle}
-            onChange={(name) => this._setUsername(name)}/>
+          <TextInput style={styles.inputStyle} value={this.state.username}
+            autoCapitalize='none' autoCorrect={false}
+            onChangeText={(name) => this._setUsername(name)}/>
         </RowSection>
         <RowSection style={rowSectionStyle}>
           <Text style={styles.inputLabel}>密码：</Text>
-          <Input style={styles.inputStyle}
-            onChange={(pwd) => this._setPassword(pwd)}/>
+          <TextInput style={styles.inputStyle} password={true}
+            value={this.state.pwd}
+            onChangeText={(pwd) => this._setPassword(pwd)}/>
         </RowSection>
         <RowSection style={rowSectionStyle}>
           <Text style={styles.inputLabel}></Text>
