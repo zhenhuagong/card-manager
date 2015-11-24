@@ -22,7 +22,7 @@ let Configs = {
     history: apiServer + '/appbusi/qryusedbydate',  //查询短信和GPRS历史使用量
     cardinfo: apiServer + '/appbusi/qrycardinfo',   //查询号码信息
     sendSMS: apiServer + '/appbusi/sendmsg',  //发送短信
-    listSMS: '',
+    listSMS: apiServer + '/appbusi/getmsg',   // 接收短信
     queryQuota: ''
   },
 
@@ -30,7 +30,6 @@ let Configs = {
     DASHBOARD: 'dashboard',
     SMS: 'sms_management',
     SMS_SEND: 'sms_send',
-    SMS_LIST: 'sms_list',
     QUOTA: 'quota_management',
     ESHOP: 'eshop',
     ABOUT: 'about'
@@ -43,7 +42,9 @@ let Configs = {
     grayMenu: '#FAFAFA',
     whiteContent: '#F5FCFF',
     buttonUnderlay: '#009688',
-    menuBorder: '#E0F2F1'
+    menuBorder: '#CCCCCC',
+    activeText: '#004D40',
+    inactiveText: 'gray'
   },
 
   literals: {

@@ -44,6 +44,21 @@ let Request = {
       .then((responseData) => {
         return Promise.resolve(responseData);
       });
+  },
+
+  fetchAll(endpoint, queries, result) {
+    result = result || [];
+    return this.get(endpoint, queries)
+      .then((data) => {
+        result = result.concat(data.list);
+        if (data.cnt === result.length) {
+          return Promise.resolve(result);
+        } else {
+          // fetch next page
+          queries.PAGE_NUM = parseInt(queries.PAGE_NUM, 10) + 1;
+          return fetchAll(endpoint, queries, result);
+        }
+      });
   }
 };
 
