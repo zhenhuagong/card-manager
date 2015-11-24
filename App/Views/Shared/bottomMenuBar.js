@@ -52,14 +52,13 @@ let BottomMenuBar = React.createClass({
         break;
     }
     return (
-      <View style={styles.menubar}>
+      <View style={[styles.menubar, this.props.style]}>
         <TouchableHighlight style={menuStyles.dashboard}
-          ref={Configs.routes.DASHBOARD} onPress={this._goFav}
-          underlayColor={Configs.colors.grayMenu}>
-          <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
+          onPress={this._goDashboard} underlayColor={Configs.colors.grayMenu}>
+          <View style={{flexDirection: 'column', alignItems: 'center', padding: 5}}>
             <Icon
               name='material|view-dashboard'
-              size={22}
+              size={24}
               style={styles.menuIcon} />
             <Text style={styles.menuText}>
               概览
@@ -67,12 +66,11 @@ let BottomMenuBar = React.createClass({
           </View>
         </TouchableHighlight>
         <TouchableHighlight style={menuStyles.sms}
-          ref={Configs.routes.SMS} onPress={this._goSMS}
-          underlayColor={Configs.colors.grayMenu}>
-          <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
+          onPress={this._goSMS} underlayColor={Configs.colors.grayMenu}>
+          <View style={{flexDirection: 'column', alignItems: 'center', padding: 5}}>
             <Icon
               name='material|email'
-              size={22}
+              size={24}
               style={styles.menuIcon} />
             <Text style={styles.menuText}>
               短信
@@ -80,12 +78,11 @@ let BottomMenuBar = React.createClass({
           </View>
         </TouchableHighlight>
         <TouchableHighlight style={menuStyles.quota}
-          ref={Configs.routes.QUOTA} onPress={this._goQuota}
-          underlayColor={Configs.colors.grayMenu}>
-          <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
+          onPress={this._goQuota} underlayColor={Configs.colors.grayMenu}>
+          <View style={{flexDirection: 'column', alignItems: 'center', padding: 5}}>
             <Icon
               name='material|input-antenna'
-              size={22}
+              size={24}
               style={styles.menuIcon} />
             <Text style={styles.menuText}>
               流量
@@ -93,12 +90,11 @@ let BottomMenuBar = React.createClass({
           </View>
         </TouchableHighlight>
         <TouchableHighlight style={menuStyles.eshop}
-          ref={Configs.routes.ESHOP} onPress={this._goEShop}
-          underlayColor={Configs.colors.grayMenu}>
-          <View style={{flexDirection: 'row', alignItems: 'center', padding: 5}}>
+          onPress={this._goEShop} underlayColor={Configs.colors.grayMenu}>
+          <View style={{flexDirection: 'column', alignItems: 'center', padding: 5}}>
             <Icon
               name='material|shopping-cart'
-              size={22}
+              size={24}
               style={styles.menuIcon} />
             <Text style={styles.menuText}>
               商城
@@ -109,7 +105,7 @@ let BottomMenuBar = React.createClass({
     )
   },
 
-  _goFav() {
+  _goDashboard() {
     let _nagiavtor = this.props.navigator;
     if (_nagiavtor.name !== Configs.routes.DASHBOARD) {
       _nagiavtor.push({
@@ -151,7 +147,6 @@ let styles = StyleSheet.create({
     backgroundColor: Configs.colors.grayMenu,
     borderTopColor: Configs.colors.menuBorder,
     borderTopWidth: 1,
-    height: 56,
     flexDirection: 'row'
   },
   menu: {
@@ -160,7 +155,7 @@ let styles = StyleSheet.create({
     flex: 1
   },
   menuText: {
-    fontSize: 14,
+    fontSize: 12,
     color: 'black',
   },
   menuIcon: {

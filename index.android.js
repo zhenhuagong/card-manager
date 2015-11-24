@@ -12,8 +12,7 @@ let {
   Text,
   View,
   Navigator,
-  BackAndroid,
-  AsyncStorage
+  BackAndroid
 } = React;
 
 let Configs = require('./App/configs');
@@ -62,53 +61,30 @@ let CardManager = React.createClass({
       // index: 1
       case Configs.routes.SMS:
         return (
-          <View style={styles.container}>
-            <NavToolbar navIcon={true} navigator={navigator}/>
-            <SMSManagement navigator={navigator} name={route.name}/>
-            <BottomMenuBar current={Configs.routes.SMS} navigator={navigator} name={route.name}/>
-          </View>
+          <SMSManagement navigator={navigator} name={route.name}/>
         );
       case Configs.routes.SMS_SEND:
         return (
-          <View style={styles.container}>
-            <NavToolbar navIcon={true} navigator={navigator}/>
-            <SMSSend navigator={navigator} name={route.name}/>
-            <BottomMenuBar current={Configs.routes.SMS} navigator={navigator} name={route.name}/>
-          </View>
+          <SMSSend navigator={navigator} name={route.name}/>
         );
       case Configs.routes.SMS_LIST:
         return (
-          <View style={styles.container}>
-            <NavToolbar navIcon={true} navigator={navigator}/>
-            <SMSList navigator={navigator} name={route.name}/>
-            <BottomMenuBar current={Configs.routes.SMS} navigator={navigator} name={route.name}/>
-          </View>
+          <SMSList navigator={navigator} name={route.name}/>
         );
       // index: 2
       case Configs.routes.QUOTA:
         return (
-          <View style={styles.container}>
-            <NavToolbar navIcon={true} navigator={navigator}/>
-            <QuotaManagement navigator={navigator} name={route.name}/>
-            <BottomMenuBar current={Configs.routes.QUOTA} navigator={navigator} name={route.name}/>
-          </View>
-        );
+          <QuotaManagement navigator={navigator} name={route.name}/>
+       );
       // index: 3
       case Configs.routes.ESHOP:
         return (
-          <View style={styles.container}>
-            <NavToolbar navIcon={true} navigator={navigator}/>
-            <EShop navigator={navigator} name={route.name}/>
-            <BottomMenuBar current={Configs.routes.ESHOP} navigator={navigator} name={route.name}/>
-          </View>
+          <EShop navigator={navigator} name={route.name}/>
         );
       // index: 4
       case Configs.routes.ABOUT:
         return (
-          <View style={styles.container}>
-            <NavToolbar navIcon={true} navigator={navigator}/>
-            <About navigator={navigator} name={route.name}/>
-          </View>
+          <About navigator={navigator} name={route.name}/>
         );
     }
   },
@@ -116,14 +92,7 @@ let CardManager = React.createClass({
 
 let styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'column',
-  },
-  loginContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   }
 });
 

@@ -22,31 +22,25 @@ let {
 let Configs = require('../../configs');
 let NavToolbar = React.createClass({
 
+  propTypes: {
+    title: React.PropTypes.string.isRequired
+  },
+
   render() {
-    if (this.props.navIcon) {
-      return (
-        <ToolbarAndroid
-          style={styles.toolbar}
-          navIcon={{uri: "ic_arrow_back_white_24dp", isStatic: true}}
-          onIconClicked={this.props.navigator.pop}
-          titleColor="#fff"
-          title={Configs.literals.title} />
-      )
-    }
     return (
       <ToolbarAndroid
-        style={styles.toolbar}
+        style={[styles.toolbar, this.props.style]}
+        navIcon={{uri: "ic_arrow_back_white_24dp", isStatic: true}}
         onIconClicked={this.props.navigator.pop}
         titleColor="#fff"
-        title='CardManager' />
+        title={this.props.title} />
     )
   }
 });
 
 let styles = StyleSheet.create({
   toolbar: {
-    backgroundColor: Configs.colors.greenLight,
-    height: 56
+    backgroundColor: Configs.colors.greenLight
   }
 });
 

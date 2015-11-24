@@ -100,7 +100,7 @@ let Dashboard = React.createClass({
               onActionSelected={this.onActionSelected} />
             {content}
           </View>
-          <BottomMenuBar current={Configs.routes.DASHBOARD}
+          <BottomMenuBar style={{height: 56}} current={Configs.routes.DASHBOARD}
             navigator={this.props.navigator}/>
         </DrawerLayoutAndroid>
       );

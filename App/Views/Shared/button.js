@@ -36,7 +36,7 @@ let Button = React.createClass({
 let styles = StyleSheet.create({
   button: {
     borderColor: '#E0F2F1',
-    borderRadius: 5,
+    borderRadius: 2,
     borderWidth: 1,
     margin: 10,
     height: 44,
