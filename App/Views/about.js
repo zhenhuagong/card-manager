@@ -20,19 +20,24 @@ let {
 } = React;
 
 let Configs = require('../configs');
+let NavToolbar = require('./Shared/navToolBar');
+
 let About = React.createClass({
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          欢迎使用{Configs.literals.title}!
-        </Text>
-        <Text style={styles.instructions}>
-          版本号 v0.0.1
-        </Text>
-        <Text style={styles.instructions}>
-          @2015 All Rights Reserved.
-        </Text>
+        <NavToolbar style={styles.navBar} title="关于" navigator={this.props.navigator}/>
+        <View style={styles.content}>
+          <Text style={styles.welcome}>
+            欢迎使用{Configs.literals.title}!
+          </Text>
+          <Text style={styles.instructions}>
+            版本号 v0.0.1
+          </Text>
+          <Text style={styles.instructions}>
+            @2015 All Rights Reserved.
+          </Text>
+        </View>
       </View>
     );
   }
@@ -41,9 +46,16 @@ let About = React.createClass({
 let styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
+    backgroundColor: Configs.colors.whiteContent
+  },
+  navBar: {
+    height: 56
+  },
+  content: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
   welcome: {
     fontSize: 20,
