@@ -23,7 +23,8 @@ let {
   View,
   DrawerLayoutAndroid,
   TouchableHighlight,
-  ToolbarAndroid
+  ToolbarAndroid,
+  ProgressBarAndroid
 } = React;
 
 let RowSection = require('./Shared/rowSection');
@@ -47,28 +48,34 @@ let Dashboard = React.createClass({
 
   getInitialState() {
     return {
-      loaded: false,
-      loggedin: false
+      loggedin: false,
+      loginChecked: false,
+      error: ''
     };
-  },
-
-  // check login state
-  componentWillMount() {
-    this._checkLoginState().done();
-  },
-
-  componentWillUpdate(nextState, nextProps) {
-    console.log('dashboard update');
   },
 
   render() {
     console.log('loggedin? ' + this.state.loggedin);
-    if (!this.state.loggedin) { // not logged in yet, show login form
-      return (
-        <View style={styles.container}>
-          <Login navigator={this.props.navigator}/>
-        </View>
-      );
+    if (!this.state.loggedin) { // not logged in yet
+      if (this.state.loginChecked) {  // show login form
+        return (
+          <View style={styles.container}>
+            <Login navigator={this.props.navigator}/>
+          </View>
+        );
+      } else {  // check cookie(which is asyncstorage locally)
+        setTimeout(() => {
+          this._checkLoginState().done()
+        }, 1000);
+        return (
+          <View style={styles.content}>
+            <Image source={require('../images/ic_logo.png')}
+              style={{width: 120, height: 120, marginBottom: 30}} />
+            <ProgressBarAndroid styleAttr="Large" style={{marginBottom: 30}}/>
+            <Text>...</Text>
+          </View>
+        );
+      }
     } else {  // already logged in, show dashboard
       let content = (
         <View style={styles.content}>
@@ -120,19 +127,22 @@ let Dashboard = React.createClass({
         let user = JSON.parse(value);
         this.setState({
           user: user,
-          loggedin: true
+          loggedin: true,
+          loginChecked: true
         });
         FlashData.set('userid', user.USER_ID);
       } else {
         this.setState({
           loggedin: false,
-          error: ''
+          error: '',
+          loginChecked: true
         });
       }
     } catch (error) {
       this.setState({
         loggedin: false,
-        error: error
+        error: error,
+        loginChecked: true
       });
       console.log(error);
     }

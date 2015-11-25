@@ -3,8 +3,9 @@ let QS = require('./qs');
 
 // A promised fetch with timeout
 let timeout = (ms, promise) => {
-  return new Promise(function(resolve, reject) {
-    setTimeout(function() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('request timeout');
       reject(new Error(Config.errorMsg.fetchTimeout))
     }, ms);
     promise.then(resolve, reject);

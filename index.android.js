@@ -43,7 +43,7 @@ let CardManager = React.createClass({
     return (
       <Navigator
         style={styles.container}
-        initialRoute={{name: Configs.routes.DASHBOARD, index: 0}}
+        initialRoute={{name: Configs.routes.DASHBOARD}}
         configureScene={() => Navigator.SceneConfigs.FadeAndroid}
         renderScene={this._renderScene} />
     );
@@ -52,12 +52,10 @@ let CardManager = React.createClass({
   _renderScene(route, navigator) {
     _navigator = navigator;
     switch(route.name) {
-      // index: 0
       case Configs.routes.DASHBOARD:
         return (
           <Dashboard navigator={navigator} name={route.name}/>
         );
-      // index: 1
       case Configs.routes.SMS:
         return (
           <SMSManagement navigator={navigator} name={route.name}/>
@@ -66,17 +64,14 @@ let CardManager = React.createClass({
         return (
           <SMSSend navigator={navigator} name={route.name}/>
         );
-      // index: 2
       case Configs.routes.QUOTA:
         return (
           <QuotaManagement navigator={navigator} name={route.name}/>
        );
-      // index: 3
       case Configs.routes.ESHOP:
         return (
           <EShop navigator={navigator} name={route.name}/>
         );
-      // index: 4
       case Configs.routes.ABOUT:
         return (
           <About navigator={navigator} name={route.name}/>

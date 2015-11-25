@@ -103,11 +103,10 @@ let Login = React.createClass({
         console.log('got login data' + JSON.stringify(data));
         switch(data.result) {
           case '00':
-            this._setUserLogin(JSON.stringify(data.pd));
-            this.props.navigator.push({
+            this._setUserLogin(JSON.stringify(data.pd)).done();
+            this.props.navigator.replace({
               name: Configs.routes.DASHBOARD
             });
-            FlashData.set('userid', data.pd.USER_ID);
             break;
           case '01':
             this.setState({ error: '用户名或者密码错' });

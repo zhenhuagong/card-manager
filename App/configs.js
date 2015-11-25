@@ -10,7 +10,7 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-let apiServer = 'http://101.200.176.31:8080/zxtd';
+let apiServer = 'http://101.200.176.31';
 let storagePrefix = '@SimonGongRNWWT:';
 
 let Configs = {
