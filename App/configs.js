@@ -18,12 +18,11 @@ let Configs = {
 
   endpoints: {
     login: apiServer + '/appuser/login', // 登陆
-    overview: apiServer + '/appbusi/queryinfo',   //查询汇总信息
-    history: apiServer + '/appbusi/qryusedbydate',  //查询短信和GPRS历史使用量
-    cardinfo: apiServer + '/appbusi/qrycardinfo',   //查询号码信息
+    queryInfo: apiServer + '/appbusi/queryinfo',   //查询卡的使用汇总信息
+    queryInfoByDate: apiServer + '/appbusi/qryusedbydate',  //按时间段查询短信和GPRS历史使用量
+    queryCardInfo: apiServer + '/appbusi/qrycardinfo',   //查询号码信息
     sendSMS: apiServer + '/appbusi/sendmsg',  //发送短信
-    listSMS: apiServer + '/appbusi/getmsg',   // 接收短信
-    queryQuota: ''
+    listSMS: apiServer + '/appbusi/getmsg'   // 接收短信
   },
 
   routes: {
