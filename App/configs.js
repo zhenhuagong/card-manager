@@ -51,7 +51,7 @@ let Configs = {
   },
 
   errorMsg: {
-    fetchTimeout: '网络超时。\r\n请检查网络连接，稍后再试。'
+    fetchTimeout: '网络超时。请检查网络连接，稍后再试。'
   },
 
   storageKeys: {

@@ -13,7 +13,7 @@
 'use strict';
 
 let React = require('react-native');
-let { StyleSheet, Text, View, AsyncStorage, Image, TextInput } = React;
+let { StyleSheet, Text, View, AsyncStorage, Image, TextInput, ProgressBarAndroid } = React;
 
 let BackDrop = require('../Shared/backdrop');
 let Button = require('../Shared/button');
@@ -30,11 +30,34 @@ let Login = React.createClass({
   getInitialState() {
     return {
       username: '',
-      pwd: ''
+      pwd: '',
+      showSpinner: false,
+      editable: true
     };
   },
 
+  componentWillUpdate(nextProps, nextState) {
+    nextState.showSpinner = !nextState.editable;
+  },
+
   render() {
+    let spinnerNode, errorNode;
+    if (this.state.showSpinner) {
+      spinnerNode = (
+        <View style={{flexDirection: 'row'}}>
+          <ProgressBarAndroid styleAttr='Small'/>
+          <Text style={{marginLeft: 20}}>登陆中...</Text>
+        </View>
+      );
+    }
+    if (this.state.error) {
+      errorNode = (
+        <Text style={[styles.inputStyle, styles.errorStyle]}>
+          {this.state.error}
+        </Text>
+      );
+    }
+
     return (
       <View style={styles.container}>
         <View style={{marginBottom: 50}}>
@@ -46,27 +69,23 @@ let Login = React.createClass({
           <Text style={styles.inputLabel}>用户名：</Text>
           <TextInput style={styles.inputStyle} value={this.state.username}
             autoCapitalize='none' autoCorrect={false}
+            editable={this.state.editable}
             onChangeText={(name) => this._setUsername(name)}/>
         </RowSection>
         <RowSection style={rowSectionStyle}>
           <Text style={styles.inputLabel}>密码：</Text>
           <TextInput style={styles.inputStyle} password={true}
-            value={this.state.pwd}
+            value={this.state.pwd} editable={this.state.editable}
             onChangeText={(pwd) => this._setPassword(pwd)}/>
         </RowSection>
         <RowSection style={rowSectionStyle}>
-          <Text style={styles.inputLabel}></Text>
-          <Text style={[styles.inputStyle, styles.errorStyle]}>
-            {this.state.error}
-          </Text>
+          {errorNode}
+          {spinnerNode}
         </RowSection>
         <RowSection style={rowSectionStyle}>
           <Button onPress={this._login}>
             <Text style={{color: '#ffffff'}}>登陆</Text>
           </Button>
-          <View style={styles.forgetPwd}>
-            <Text>忘记密码?</Text>
-          </View>
         </RowSection>
         <RowSection style={rowSectionStyle}>
           <View style={styles.registerView}>
@@ -87,7 +106,10 @@ let Login = React.createClass({
 
   _login() {
     if (this._validateInput()) {
-      this.setState({ error: '' });
+      this.setState({
+        error: '',
+        editable: false
+      });
       let fkey = MD5(this.state.username + Moment().format('YYYYMMDD') + ',fh,');
       console.log('login with combo: ' + JSON.stringify(this.state));
       Request.get(
@@ -109,31 +131,55 @@ let Login = React.createClass({
             });
             break;
           case '01':
-            this.setState({ error: '用户名或者密码错' });
+            this.setState({
+              error: '用户名或者密码错',
+              editable: true
+            });
             break;
           case '02':
-            this.setState({ error: '用户名密码校验成功，读取用户信息失败' });
+            this.setState({
+              error: '用户名密码校验成功，读取用户信息失败',
+              editable: true
+            });
             break;
           case '03':
-            this.setState({ error: '该用户未注册' });
+            this.setState({
+              error: '该用户未注册',
+              editable: true
+            });
             break;
           case '04':
-            this.setState({ error: '用户名和密码不能为空' });
+            this.setState({
+              error: '用户名和密码不能为空',
+              editable: true
+            });
             break;
           case '05':
-            this.setState({ error: '登陆请求校验码不匹配' });
+            this.setState({
+              error: '登陆请求校验码不匹配',
+              editable: true
+            });
             break;
           default:
-            this.setState({ error: '服务器异常，暂时无法登陆，请稍后再试' });
+            this.setState({
+              error: '服务器异常，暂时无法登陆，请稍后再试',
+              editable: true
+            });
             break;
         }
       })
-      .catch((err) => {
+      .catch((error) => {
         console.log('got error when login ' + error);
-        this.setState({ error });
+        this.setState({
+          error: error.toString(),
+          editable: true
+        });
       });
     } else {
-      this.setState({error: '用户名和密码不能为空'});
+      this.setState({
+        error: '用户名和密码不能为空',
+        editable: true
+      });
     }
   },
 
@@ -189,7 +235,8 @@ let styles = StyleSheet.create({
     color: 'orange'
   },
   errorStyle: {
-    color: 'red'
+    color: 'red',
+    fontSize: 14
   }
 });
 
