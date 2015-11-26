@@ -76,13 +76,23 @@ let SMS = React.createClass({
                 onValueChange={(value) => this.setState({showSendList: value})}
                 value={this.state.showSendList} />
               <Text style={{color: sendText}}>已发送</Text>
+              <TouchableHighlight onPress={this._fetchList}
+                underlayColor={Configs.colors.greenLight}>
+                <View style={styles.refresh}>
+                  <Icon
+                    name='material|refresh'
+                    size={22}
+                    style={styles.sendIcon} />
+                  <Text style={{color: '#000000'}}>刷新</Text>
+                </View>
+              </TouchableHighlight>
             </View>
             <TouchableHighlight onPress={this._sendSMS}
               underlayColor={Configs.colors.greenLight}>
               <View style={styles.filter}>
                 <Icon
                   name='material|border-color'
-                  size={24}
+                  size={22}
                   style={styles.sendIcon} />
                   <Text style={{color: '#000000'}}>新建</Text>
               </View>
@@ -175,6 +185,12 @@ let styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 10,
     marginRight: 10
+  },
+  refresh: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
   },
   tabBar: {
     height: 56
