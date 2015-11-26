@@ -6,7 +6,8 @@ let {
   Text,
   View,
   SwitchAndroid,
-  ProgressBarAndroid
+  ProgressBarAndroid,
+  TouchableHighlight
 } = React;
 
 let NavToolbar = require('../Shared/navToolBar');
@@ -17,6 +18,7 @@ let ItemList = require('../Shared/itemList');
 let FlashData = require('../../Networks/flashData');
 let Request = require('../../Networks/request');
 let Moment = require('moment');
+let { Icon } = require('react-native-icons');
 
 let SMS = React.createClass({
 
@@ -27,7 +29,7 @@ let SMS = React.createClass({
 
   getInitialState() {
     return {
-      showSendList: false,  // show received messages by default
+      showSendList: true,  // show sent messages by default
       rcvList: [],  // receive list
       sendList: [],  // send list
       error: '',
@@ -75,9 +77,16 @@ let SMS = React.createClass({
                 value={this.state.showSendList} />
               <Text style={{color: sendText}}>已发送</Text>
             </View>
-            <Button onPress={this._sendSMS} style={{height: 34, width: 100}}>
-              <Text style={{color: '#ffffff'}}>发送短信</Text>
-            </Button>
+            <TouchableHighlight onPress={this._sendSMS}
+              underlayColor={Configs.colors.greenLight}>
+              <View style={styles.filter}>
+                <Icon
+                  name='material|border-color'
+                  size={24}
+                  style={styles.sendIcon} />
+                  <Text style={{color: '#000000'}}>新建</Text>
+              </View>
+            </TouchableHighlight>
           </View>
           <View style={styles.content}>
             {contentNode}
@@ -157,17 +166,24 @@ let styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     marginTop: 20,
-    height: 60,
-    paddingLeft: 5
+    height: 60
   },
   filter: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginLeft: 10,
+    marginRight: 10
   },
   tabBar: {
     height: 56
+  },
+  sendIcon: {
+    width: 24,
+    height: 24,
+    marginLeft: 6,
+    marginRight: 6
   }
 });
 
