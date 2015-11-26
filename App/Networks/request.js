@@ -30,7 +30,9 @@ let Request = {
 
   fetchAll(endpoint, queries, result) {
     result = result || [];
-    return this.get(endpoint, queries)
+    return timeout(
+      Config.timeout,
+      this.get(endpoint, queries)
       .then((data) => {
         result = result.concat(data.list);
         if (data.cnt === result.length) {
@@ -38,9 +40,10 @@ let Request = {
         } else {
           // fetch next page
           queries.PAGE_NUM = parseInt(queries.PAGE_NUM, 10) + 1;
-          return fetchAll(endpoint, queries, result);
+          return this.fetchAll(endpoint, queries, result);
         }
-      });
+      })
+    );
   }
 };
 

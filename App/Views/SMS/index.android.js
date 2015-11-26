@@ -29,7 +29,7 @@ let SMS = React.createClass({
 
   getInitialState() {
     return {
-      showSendList: true,  // show sent messages by default
+      showSentList: false,  // show sent messages by default
       rcvList: [],  // receive list
       sendList: [],  // send list
       error: '',
@@ -51,10 +51,14 @@ let SMS = React.createClass({
 
   render() {
     // show progress bar if data is not loaded yet
-    let contentNode = <ProgressBarAndroid styleAttr="Large" />;
+    let contentNode = (
+      <View style={styles.progressBar}>
+        <ProgressBarAndroid styleAttr="Large" />
+      </View>
+    );
     let sendText, rcvText;
     if (this.state.dataLoaded) {
-      if (this.state.showSendList) {
+      if (this.state.showSentList) {
         sendText = Configs.colors.activeText;
         rcvText = Configs.colors.inactiveText;
         contentNode = <ItemList header={this.listHeader} list={this.state.sendList} />;
@@ -73,8 +77,8 @@ let SMS = React.createClass({
             <View style={styles.filter}>
               <Text style={{color: rcvText}}>已接收</Text>
               <SwitchAndroid
-                onValueChange={(value) => this.setState({showSendList: value})}
-                value={this.state.showSendList} />
+                onValueChange={(value) => this.setState({showSentList: value})}
+                value={this.state.showSentList} />
               <Text style={{color: sendText}}>已发送</Text>
               <TouchableHighlight onPress={this._fetchList}
                 underlayColor={Configs.colors.greenLight}>
@@ -153,8 +157,9 @@ let SMS = React.createClass({
       this._divideList(list);
     })
     .catch((err) => {
+      console.log(err);
       let dataLoaded = true;
-      this.setState({ err, dataLoaded });
+      this.setState({ error: err, dataLoaded: dataLoaded });
     })
   }
 });
@@ -170,8 +175,10 @@ let styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center'
+  },
+  progressBar: {
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   header: {
     flexDirection: 'row',
