@@ -66,15 +66,15 @@ let Login = React.createClass({
             style={{width: 92, height: 92}} />
         </View>
         <RowSection style={rowSectionStyle}>
-          <Text style={styles.inputLabel}>用户名：</Text>
           <TextInput style={styles.inputStyle} value={this.state.username}
             autoCapitalize='none' autoCorrect={false}
+            placeholder='用户名/ID/邮箱'
             editable={this.state.editable}
             onChangeText={(name) => this._setUsername(name)}/>
         </RowSection>
         <RowSection style={rowSectionStyle}>
-          <Text style={styles.inputLabel}>密码：</Text>
           <TextInput style={styles.inputStyle} password={true}
+            placeholder='密码'
             value={this.state.pwd} editable={this.state.editable}
             onChangeText={(pwd) => this._setPassword(pwd)}/>
         </RowSection>
