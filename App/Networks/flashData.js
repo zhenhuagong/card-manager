@@ -18,7 +18,6 @@ module.exports = {
     if (data.hasOwnProperty(key)) {
       return data[key];
     }
-    return new Error('No data with such key exists');
   },
   set: (key, value) => {
     data[key] = value;
@@ -27,7 +26,6 @@ module.exports = {
     if (data.hasOwnProperty(key)) {
       delete data[key];
     }
-    return new Error('No data with such key exists');
   },
   clear: () => {
     data = {};

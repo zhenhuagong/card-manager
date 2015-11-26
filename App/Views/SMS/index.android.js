@@ -39,32 +39,12 @@ let SMS = React.createClass({
 
   componentDidMount() {
     // fetch list after mounted
-    Request.fetchAll(Configs.endpoints.listSMS, {
-      // TODO: query parameters
-      USERID: FlashData.get('userid'),
-      PAGE_NUM: 1,
-      PAGE_SIZE: 20,
-      DATE_S: this.state.queryDateStart,
-      DATA_E: this.state.queryDateEnd
-    }, [])
-    .then((data) => {
-      // divide data by type: 发送，接收
-      let rcvList = [];
-      let sendList = [];
-      let dataLoaded = true;
-      data.map((item) => {
-        if (item.TYPE === '发送') {
-          sendList.push(this._messageShrink(item));
-        } else {
-          rcvList.push(this._messageShrink(item));
-        }
-      });
-      this.setState({ rcvList, sendList, dataLoaded });
-    })
-    .catch((err) => {
-      let dataLoaded = true;
-      this.setState({ err, dataLoaded });
-    })
+    let cachedList = FlashData.get('smslist');
+    if (cachedList) {
+      this._divideList(cachedList);
+    } else {
+      this._fetchList();
+    }
   },
 
   render() {
@@ -123,6 +103,40 @@ let SMS = React.createClass({
       }
     });
     return message;
+  },
+
+  // divide sms list by type: 发送，接收
+  _divideList(list) {
+    let rcvList = [];
+    let sendList = [];
+    let dataLoaded = true;
+    list.map((item) => {
+      if (item.TYPE === '发送') {
+        sendList.push(this._messageShrink(item));
+      } else {
+        rcvList.push(this._messageShrink(item));
+      }
+    });
+    this.setState({ rcvList, sendList, dataLoaded });
+  },
+
+  _fetchList() {
+    Request.fetchAll(Configs.endpoints.listSMS, {
+      // TODO: query parameters
+      USERID: FlashData.get('userid'),
+      PAGE_NUM: 1,
+      PAGE_SIZE: 20,
+      DATE_S: this.state.queryDateStart,
+      DATA_E: this.state.queryDateEnd
+    }, [])
+    .then((list) => {
+      FlashData.set('smslist', list);
+      this._divideList(list);
+    })
+    .catch((err) => {
+      let dataLoaded = true;
+      this.setState({ err, dataLoaded });
+    })
   }
 });
 

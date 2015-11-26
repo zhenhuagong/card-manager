@@ -47,7 +47,7 @@ let Configs = {
   },
 
   literals: {
-    title: '物物通'
+    title: '物讯通'
   },
 
   errorMsg: {

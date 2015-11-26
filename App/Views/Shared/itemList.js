@@ -63,7 +63,7 @@ let ItemList = React.createClass({
       rowColor = '#F6F6F6';
     }
     let rowTexts = Object.keys(rowData).map((key) => (
-      <View style={styles.cell}>
+      <View style={styles.cell} key={key}>
         <Text>{rowData[key]}</Text>
       </View>
     ));
