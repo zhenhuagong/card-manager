@@ -18,13 +18,7 @@ let Eshop = React.createClass({
         <NavToolbar style={styles.navBar} title="商城" navigator={this.props.navigator}/>
         <View style={styles.content}>
           <Text style={styles.welcome}>
-            Welcome to React Native!
-          </Text>
-          <Text style={styles.instructions}>
-            To get started, edit index.android.js
-          </Text>
-          <Text style={styles.instructions}>
-            Shake or press menu button for dev menu
+            敬请期待！
           </Text>
         </View>
         <BottomMenuBar style={styles.tabBar} current={Configs.routes.ESHOP}
