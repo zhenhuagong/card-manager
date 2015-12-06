@@ -29,7 +29,7 @@ let SMS = React.createClass({
 
   getInitialState() {
     return {
-      showSentList: false,  // show sent messages by default
+      showSentList: true,  // show sent messages by default
       rcvList: [],  // receive list
       sendList: [],  // send list
       error: '',
@@ -144,17 +144,17 @@ let SMS = React.createClass({
   },
 
   _fetchList() {
-    Request.fetchAll(Configs.endpoints.listSMS, {
-      // TODO: query parameters
+    Request.get(Configs.endpoints.listSMS, {
+      // TODO: fetch N pages one time
       USERID: FlashData.get('userid'),
       PAGE_NUM: 1,
       PAGE_SIZE: 20,
       DATE_S: this.state.queryDateStart,
       DATA_E: this.state.queryDateEnd
     }, [])
-    .then((list) => {
-      FlashData.set('smslist', list);
-      this._divideList(list);
+    .then((data) => {
+      FlashData.set('smslist', data.list);
+      this._divideList(data.list);
     })
     .catch((err) => {
       console.log(err);
