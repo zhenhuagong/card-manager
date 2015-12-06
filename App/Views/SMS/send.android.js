@@ -20,6 +20,7 @@ let Request = require('../../Networks/request');
 let Configs = require('../../configs');
 let { Icon } = require('react-native-icons');
 let FlashData = require('../../Networks/flashData');
+let NavToolbar = require('../Shared/navToolBar');
 
 let SendSMS = React.createClass({
   getInitialState() {
@@ -91,41 +92,44 @@ let SendSMS = React.createClass({
 
     return (
       <View style={styles.container}>
-        <View style={styles.formItem}>
-          <TextInput style={styles.input}
-            keyboardType='numeric'
-            placeholder='卡号'
-            editable={this.state.editable}
-            value={this.state.number}
-            onChangeText={(number) => {
-              this.setState({number});
-            }}/>
-        </View>
-        <View style={styles.formItem}>
-          <TextInput style={[styles.input, styles.inputArea]} multiline={true}
-            autoCapitalize='none' autoCorrect={false}
-            editable={this.state.editable}
-            placeholder='短信内容' textAlign='start' textAlignVertical='top'
-            onChangeText={(text) => {
-              this.setState({text});
-            }}>
-            <Text>{contents}</Text>
-          </TextInput>
-          <Text style={styles.registerText}>（通配符: 姓名:%name% , 尊称:%title%）</Text>
-        </View>
-        <View style={styles.formItem}>
-          {deliverNode}
-          {errorNode}
-        </View>
-        <View style={{marginTop: 30}}>
-          <Button onPress={this._send}>
-            <Text style={{color: '#ffffff'}}>发送</Text>
-            <Icon
-              name='material|mail-send'
-              size={22}
-              color='#ffffff'
-              style={styles.sendIcon} />
-          </Button>
+        <NavToolbar style={styles.navBar} title="发送短信" navigator={this.props.navigator}/>
+        <View style={styles.content}>
+          <View style={styles.formItem}>
+            <TextInput style={styles.input}
+              keyboardType='numeric'
+              placeholder='卡号'
+              editable={this.state.editable}
+              value={this.state.number}
+              onChangeText={(number) => {
+                this.setState({number});
+              }}/>
+          </View>
+          <View style={styles.formItem}>
+            <TextInput style={[styles.input, styles.inputArea]} multiline={true}
+              autoCapitalize='none' autoCorrect={false}
+              editable={this.state.editable}
+              placeholder='短信内容' textAlign='start' textAlignVertical='top'
+              onChangeText={(text) => {
+                this.setState({text});
+              }}>
+              <Text>{contents}</Text>
+            </TextInput>
+            <Text style={styles.registerText}>（通配符: 姓名:%name% , 尊称:%title%）</Text>
+          </View>
+          <View style={styles.formItem}>
+            {deliverNode}
+            {errorNode}
+          </View>
+          <View style={{marginTop: 30}}>
+            <Button onPress={this._send}>
+              <Text style={{color: '#ffffff'}}>发送</Text>
+              <Icon
+                name='material|mail-send'
+                size={22}
+                color='#ffffff'
+                style={styles.sendIcon} />
+            </Button>
+          </View>
         </View>
       </View>
       )
@@ -183,9 +187,16 @@ let SendSMS = React.createClass({
 let styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
+    backgroundColor: Configs.colors.whiteContent
+  },
+  navBar: {
+    height: 56
+  },
+  content: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
     height: 180
   },
   formItem: {
