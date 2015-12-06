@@ -81,7 +81,7 @@ let SMS = React.createClass({
                 value={this.state.showSentList} />
               <Text style={{color: sendText}}>已发送</Text>
               <TouchableHighlight onPress={this._fetchList}
-                underlayColor={Configs.colors.greenLight}>
+                underlayColor={Configs.colors.whiteContent}>
                 <View style={styles.refresh}>
                   <Icon
                     name='material|refresh'
