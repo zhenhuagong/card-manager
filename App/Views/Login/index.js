@@ -13,7 +13,17 @@
 'use strict';
 
 let React = require('react-native');
-let { StyleSheet, Text, View, AsyncStorage, Image, TextInput, ProgressBarAndroid } = React;
+let {
+  StyleSheet,
+  Text,
+  View,
+  AsyncStorage,
+  Image,
+  TextInput,
+  ProgressBarAndroid,
+  ActivityIndicatorIOS,
+  Platform
+} = React;
 
 let BackDrop = require('../Shared/backdrop');
 let Button = require('../Shared/button');
@@ -43,7 +53,12 @@ let Login = React.createClass({
   render() {
     let spinnerNode, errorNode;
     if (this.state.showSpinner) {
-      spinnerNode = (
+      spinnerNode = Platform.OS === 'ios' ? (
+        <View style={{flexDirection: 'row'}}>
+          <ActivityIndicatorIOS color='#00aa00' />
+          <Text style={{marginLeft: 20}}>登陆中...</Text>
+        </View>
+        ) : (
         <View style={{flexDirection: 'row'}}>
           <ProgressBarAndroid styleAttr='Small'/>
           <Text style={{marginLeft: 20}}>登陆中...</Text>
