@@ -31,7 +31,7 @@ let SMS = React.createClass({
     return {
       showSentList: true,  // show sent messages by default
       rcvList: [],  // receive list
-      sendList: [],  // send list
+      sentList: [],  // send list
       error: '',
       dataLoaded: false,
       queryDateStart: '',   // default time span for query is the current month
@@ -61,7 +61,7 @@ let SMS = React.createClass({
       if (this.state.showSentList) {
         sendText = Configs.colors.activeText;
         rcvText = Configs.colors.inactiveText;
-        contentNode = <ItemList header={this.listHeader} list={this.state.sendList} />;
+        contentNode = <ItemList header={this.listHeader} list={this.state.sentList} />;
       } else {
         rcvText = Configs.colors.activeText;
         sendText = Configs.colors.inactiveText;
@@ -120,27 +120,28 @@ let SMS = React.createClass({
 
   // shrink a message, only reserve property of content and msisdn
   _messageShrink(message) {
-    Object.keys(message).forEach((key) => {
+    let msgCopy = JSON.parse(JSON.stringify(message));
+    Object.keys(msgCopy).forEach((key) => {
       if (key !== 'CONTENT' && key !== 'MSISDN') {
-        delete message[key];
+        delete msgCopy[key];
       }
     });
-    return message;
+    return msgCopy;
   },
 
   // divide sms list by type: 发送，接收
   _divideList(list) {
     let rcvList = [];
-    let sendList = [];
+    let sentList = [];
     let dataLoaded = true;
     list.map((item) => {
       if (item.TYPE === '发送') {
-        sendList.push(this._messageShrink(item));
+        sentList.push(this._messageShrink(item));
       } else {
         rcvList.push(this._messageShrink(item));
       }
     });
-    this.setState({ rcvList, sendList, dataLoaded });
+    this.setState({ rcvList, sentList, dataLoaded });
   },
 
   _fetchList() {
