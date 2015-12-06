@@ -22,8 +22,6 @@ let SMSManagement = require('./App/Views/SMS');
 let SMSSend = require('./App/Views/SMS/send');
 let QuotaManagement = require('./App/Views/Quota');
 let EShop = require('./App/Views/EShop');
-let NavToolbar = require('./App/Views/Shared/navToolBar');
-let BottomMenuBar = require('./App/Views/Shared/bottomMenuBar');
 
 let _navigator;
 
