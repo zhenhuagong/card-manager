@@ -44,7 +44,7 @@ let FlashData = require('../Networks/flashData');
 
 let Dashboard = React.createClass({
 
-  mixins: Reflux.connect([Store]),
+  mixins: [Reflux.connect(Store)],
 
   getInitialState() {
     return {
@@ -55,7 +55,6 @@ let Dashboard = React.createClass({
   },
 
   render() {
-    console.log('loggedin? ' + this.state.loggedin);
     if (!this.state.loggedin) { // not logged in yet
       if (this.state.loginChecked) {  // show login form
         return (
@@ -64,15 +63,13 @@ let Dashboard = React.createClass({
           </View>
         );
       } else {  // check cookie(which is asyncstorage locally)
-        setTimeout(() => {
-          this._checkLoginState().done()
-        }, 1000);
+        this._checkLoginState().done()
         return (
           <View style={styles.content}>
             <Image source={require('../images/ic_logo.png')}
               style={{width: 120, height: 120, marginBottom: 30}} />
             <ProgressBarAndroid styleAttr="Large" style={{marginBottom: 30}}/>
-            <Text>...</Text>
+            <Text>检查登陆状态...</Text>
           </View>
         );
       }
