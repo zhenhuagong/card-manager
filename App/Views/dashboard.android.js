@@ -98,7 +98,7 @@ let Dashboard = React.createClass({
             <ToolbarAndroid
               title={Configs.literals.title}
               titleColor="white"
-              navIcon={require('../images/ic_drawer.png')}
+              navIcon={{uri: "ic_drawer", isStatic: true}}
               style={styles.toolbar}
               onIconClicked={() => this.drawer.openDrawer()}
               onActionSelected={this.onActionSelected} />
